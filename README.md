@@ -1,6 +1,6 @@
-# JELLY
+# JELLY<br />
 
-# React Native (+expo) navigation configurations:
-npm install @react-navigation/native
-npx expo install react-native-screens react-native-safe-area-context
-npm install @react-navigation/native-stack
+## React Native (+expo) navigation configurations:<br />
+npm install @react-navigation/native<br />
+npx expo install react-native-screens react-native-safe-area-context<br />
+npm install @react-navigation/native-stack<br />
