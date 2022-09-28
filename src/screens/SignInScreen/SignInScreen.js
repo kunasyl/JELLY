@@ -3,34 +3,25 @@ import React, {useState} from 'react'
 import Logo from '../../../assets/logo.png'
 import CustomInput from '../../components/CustomInput'
 import CustomButton from '../../components/CustomButton'
+import SocialSignInButtons from '../../components/SocialSignInButtons'
+import { useNavigation } from '@react-navigation/native'
 
 const SignInScreen = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const {height} = useWindowDimensions();
+  const navigation = useNavigation();
 
   const onSignInPressed = () => {
-    console.warn('Sign in');
+    navigation.navigate('Home')
   }
 
   const onForgotPasswordInPressed = () => {
-    console.warn('onForgotPasswordInPressed');
-  }
-
-  const onSignInFacebook = () => {
-    console.warn('onSignInFacebook');
-  }
-
-  const onSignInGoogle = () => {
-    console.warn('onSignInFacebook');
-  }
-
-  const onSignInApple = () => {
-    console.warn('onSignInApple');
+    navigation.navigate('ForgotPassword')
   }
 
   const onSignUpPressed = () => {
-    console.warn('onSignUpPressed');
+    navigation.navigate('SignUp')
   }
 
   return (
@@ -61,24 +52,7 @@ const SignInScreen = () => {
         type="TERTIARY"
       />
 
-      <CustomButton 
-        text="Sign in with Facebook" 
-        onPress={onSignInFacebook} 
-        bgColor="#E7EAF4"
-        fgColor="#4765A9"
-      />
-      <CustomButton 
-        text="Sign in with Google" 
-        onPress={onSignInGoogle} 
-        bgColor="#FAE9EA"
-        fgColor="#DD4D44"
-      />
-      <CustomButton 
-        text="Sign in with Apple" 
-        onPress={onSignInApple} 
-        bgColor="#e3e3e3"  
-        fgColor="#363636"
-      />
+      <SocialSignInButtons/>
 
       <CustomButton
         text={"Don't have an account? Create one!"}
@@ -95,7 +69,7 @@ const styles = StyleSheet.create({
     root: {
       alignItems: 'center',
       paffing: 10,
-      backgroundColor: '#84D5B2'
+      // backgroundColor: '#84D5B2'
     },
     logo: {
       // width: '100%',
