@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
       maxHeight: 200,
     },
     title: {
-      fontSize: 24,
+      fontSize: 23,
       fontWeight: 'bold',
       color: '#051C60',
       margin: 10,
