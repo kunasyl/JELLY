@@ -18,7 +18,7 @@ const CustomInput = ({ value, setValue, placeholder, secureTextEntry}) => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: 'white',
-    width: '90%',
+    width: '80%',
     height: 50,
 
     borderColor: '#e8e8e8',
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   input: {
-    paddingTop: 15
+    paddingTop: 9
   },
 })
 
