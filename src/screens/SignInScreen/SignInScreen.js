@@ -31,20 +31,23 @@ const SignInScreen = () => {
           source={Logo} 
           style={[styles.logo, {height: height*0.3}]} 
           resizeMode="contain"/>
-      
+
       <CustomInput
-          placeholder="Username"
-          value={username} 
-          setValue={setUsername}
+        value={username} 
+        setValue={setUsername}
+        placeholder={"Login"}
       />
-      <CustomInput 
-          placeholder="Password" 
-          value={password} 
-          setValue={setPassword}
-          secureTextEntry={true}
+      <CustomInput
+        value={password} 
+        setValue={setPassword}
+        secureTextEntry={true}
+        placeholder={"Password"}
       />
 
-      <CustomButton text="Sign in" onPress={onSignInPressed} />
+      <CustomButton 
+        text="Sign in" 
+        onPress={onSignInPressed} 
+        style={styles.loginBtn}/>
       
       <CustomButton 
         text="Forgot password?" 
@@ -55,7 +58,7 @@ const SignInScreen = () => {
       <SocialSignInButtons/>
 
       <CustomButton
-        text={"Don't have an account? Create one!"}
+        text={"Sign Up"}
         onPress={onSignUpPressed}
         type="TERTIARY"
       />
@@ -69,13 +72,19 @@ const styles = StyleSheet.create({
     root: {
       alignItems: 'center',
       paffing: 10,
-      // backgroundColor: '#84D5B2'
+      backgroundColor: '#DEEFF0',
+      display: "flex",
+      flexDirection: "column"
     },
     logo: {
-      // width: '100%',
+      marginVertical: 30,
       maxWidth: 300,
       maxHeight: 200,
+      boxShadow: 10,
     },
+    loginBtn:{
+      marginTop: 20,
+    }
   });
 
 export default SignInScreen
