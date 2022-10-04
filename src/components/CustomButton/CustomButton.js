@@ -27,34 +27,30 @@ const styles = StyleSheet.create({
     width: '90%',
     
     padding: 15,
-    marginVertical: 10,
+    marginVertical: 5,
 
     alignItems: 'center',
     borderRadius: 5,
   },
 
   container_PRIMARY: {
-    backgroundColor: '#84D5B2',
-    borderRadius: 30,
-    width: '40%',
-    marginTop: 50
+    backgroundColor: '#479093',
   },
 
   container_SECONDARY: {
-    borderColor: '#84D5B2',
-    borderWidth: 1,
-    width: '70%',
+    borderColor: '#479093',
+    borderWidth: 2,
   },
   
   container_TERTIARY: {},
 
   text: {
+    fontWeight: 'bold',
     color: 'white',
   },
 
   text_TERTIARY: {
     color: 'gray',
-    textDecoration: 'underline'
   },
 
   text_SECONDARY: {
