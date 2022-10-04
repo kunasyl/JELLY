@@ -4,8 +4,7 @@ import CustomInput from '../../components/CustomInput'
 import CustomButton from '../../components/CustomButton'
 import SocialSignInButtons from '../../components/SocialSignInButtons'
 import { useNavigation } from '@react-navigation/native'
-
-import { auth } from '../../../firebase'
+import { auth, user } from '../../../firebase'
 
 // import auth from '@react-native-firebase/auth';
 
@@ -22,11 +21,19 @@ const SignUpScreen = () => {
       auth
       .createUserWithEmailAndPassword(email, password)
       .then(userCredentials => {
-        navigation.navigate('Home');
-        const user = userCredentials.user;
-        console.log('Registered with:', user.email);
+        auth.updateProfile(/*auth.currentUser,*/ {
+          displayName: username
+        })
+        .then(() => {
+          navigation.navigate('Home');
+          const user = userCredentials.user;
+          console.log('Registered with:', user.email);
+        })
       })
       .catch(error => alert(error.message))
+    }
+    else {
+      console.warn('Passwords are not same!');
     }
   }
 

@@ -5,15 +5,24 @@ import CustomInput from '../../components/CustomInput'
 import CustomButton from '../../components/CustomButton'
 import SocialSignInButtons from '../../components/SocialSignInButtons'
 import { useNavigation } from '@react-navigation/native'
+import { auth, user } from '../../../firebase'
+
 
 const SignInScreen = () => {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const {height} = useWindowDimensions();
   const navigation = useNavigation();
 
   const onSignInPressed = () => {
-    navigation.navigate('Home')
+    auth
+      .signInWithEmailAndPassword(email, password)
+      .then(userCredentials => {
+        navigation.navigate('Home')
+        const user = userCredentials.user;
+        console.log('Logged in with:', user.email);
+      })
+      .catch(error => alert(error.message))
   }
 
   const onForgotPasswordInPressed = () => {
@@ -33,9 +42,9 @@ const SignInScreen = () => {
           resizeMode="contain"/>
 
       <CustomInput
-        value={username} 
-        setValue={setUsername}
-        placeholder={"Login"}
+        value={email} 
+        setValue={setEmail}
+        placeholder={"Email"}
       />
       <CustomInput
         value={password} 
