@@ -5,6 +5,10 @@ import CustomButton from '../../components/CustomButton'
 import SocialSignInButtons from '../../components/SocialSignInButtons'
 import { useNavigation } from '@react-navigation/native'
 
+import { auth } from '../../../firebase'
+
+// import auth from '@react-native-firebase/auth';
+
 const SignUpScreen = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -14,7 +18,16 @@ const SignUpScreen = () => {
   const navigation = useNavigation();
 
   const onRegisterPressed = () => {
-    navigation.navigate('ConfirmEmail')
+    if (password === passwordRepeat) {
+      auth
+      .createUserWithEmailAndPassword(email, password)
+      .then(userCredentials => {
+        navigation.navigate('Home');
+        const user = userCredentials.user;
+        console.log('Registered with:', user.email);
+      })
+      .catch(error => alert(error.message))
+    }
   }
 
   const onSignInPressed = () => {
@@ -83,4 +96,4 @@ const styles = StyleSheet.create({
     }
   });
 
-export default SignUpScreen
+  export default SignUpScreen
