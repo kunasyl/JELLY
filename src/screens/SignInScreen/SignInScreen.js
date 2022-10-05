@@ -1,6 +1,6 @@
 import { View, Text, Image, StyleSheet, useWindowDimensions, ScrollView } from 'react-native'
 import React, {useState} from 'react'
-import Logo from '../../../assets/logo.png'
+import Logo from '../../../assets/sign_in.png'
 import CustomInput from '../../components/CustomInput'
 import CustomButton from '../../components/CustomButton'
 import SocialSignInButtons from '../../components/SocialSignInButtons'
@@ -54,20 +54,22 @@ const SignInScreen = () => {
       />
 
       <CustomButton 
-        text="Sign in" 
+        text="Forgot the password?" 
+        onPress={onForgotPasswordInPressed}
+        type="TERTIARY"
+        style={styles.leftBtn}
+      />
+
+      <CustomButton 
+        text="Login" 
         onPress={onSignInPressed} 
         style={styles.loginBtn}/>
       
-      <CustomButton 
-        text="Forgot password?" 
-        onPress={onForgotPasswordInPressed}
-        type="TERTIARY"
-      />
 
       <SocialSignInButtons/>
 
       <CustomButton
-        text={"Sign Up"}
+        text={"Don’t have an account? Sign Up"}
         onPress={onSignUpPressed}
         type="TERTIARY"
       />
@@ -79,20 +81,29 @@ const SignInScreen = () => {
 
 const styles = StyleSheet.create({
     root: {
+      height: '100%',
       alignItems: 'center',
       paffing: 10,
-      backgroundColor: '#DEEFF0',
-      display: "flex",
-      flexDirection: "column"
+      backgroundColor: '#FFFFFF',
+      // position: 'relative'
+      // display: "flex",
+      // flexDirection: "column"
     },
     logo: {
-      marginVertical: 30,
+      marginTop: 60,
+      marginBottom: 40,
       maxWidth: 300,
       maxHeight: 200,
       boxShadow: 10,
     },
     loginBtn:{
       marginTop: 20,
+    },
+    leftBtn: {
+      // position: 'absolute',
+      // width: '100%',
+      textAlign: 'right',
+      // marginRight: -20,
     }
   });
 
