@@ -66,7 +66,7 @@ const SignInScreen = () => {
         style={styles.loginBtn}/>
       
 
-      <SocialSignInButtons/>
+      {/* <SocialSignInButtons/> */}
 
       <CustomButton
         text={"Don’t have an account? Sign Up"}
@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
     },
     leftBtn: {
       // position: 'absolute',
-      // width: '100%',
+    // width: '100%'
       textAlign: 'right',
       // marginRight: -20,
     }

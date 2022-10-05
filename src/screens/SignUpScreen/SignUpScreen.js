@@ -5,6 +5,7 @@ import CustomButton from '../../components/CustomButton'
 import SocialSignInButtons from '../../components/SocialSignInButtons'
 import { useNavigation } from '@react-navigation/native'
 import { auth, user } from '../../../firebase'
+import SingUpPng from '../../../assets/sign_up.png'
 
 // import auth from '@react-native-firebase/auth';
 
@@ -44,37 +45,45 @@ const SignUpScreen = () => {
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       <View style={styles.root}>
-        <Text style={styles.title}>Create an account</Text>
+        <Image 
+          source={SingUpPng} 
+          style={styles.logo} 
+          resizeMode="contain"/>
+          
       
         <CustomInput
-            placeholder="Username"
-            value={username} 
-            setValue={setUsername}
+          placeholder="Username"
+          value={username} 
+          setValue={setUsername}
         />
         <CustomInput
-            placeholder="Email"
-            value={email} 
-            setValue={setEmail}
+          placeholder="Email"
+          value={email} 
+          setValue={setEmail}
         />
         <CustomInput 
-            placeholder="Password" 
-            value={password} 
-            setValue={setPassword}
-            secureTextEntry={true}
+          placeholder="Password" 
+          value={password} 
+          setValue={setPassword}
+          secureTextEntry={true}
         />
         <CustomInput 
-            placeholder="Repeat Password" 
-            value={passwordRepeat} 
-            setValue={setPasswordRepeat}
-            secureTextEntry={true}
+          placeholder="Repeat Password" 
+          value={passwordRepeat} 
+          setValue={setPasswordRepeat}
+          secureTextEntry={true}
         />
 
-        <CustomButton text="Register" onPress={onRegisterPressed} />
+        <CustomButton 
+          text="Sign Up" 
+          onPress={onRegisterPressed}
+          style={styles.btn}
+        />
       
-        <SocialSignInButtons/>
+        {/* <SocialSignInButtons/> */}
 
         <CustomButton
-          text={"Have an account? Sign in"}
+          text={"Do you have an account? Sign in"}
           onPress={onSignInPressed}
           type="TERTIARY"
         />
@@ -88,18 +97,22 @@ const styles = StyleSheet.create({
     root: {
       alignItems: 'center',
       paffing: 10,
-      // backgroundColor: '#84D5B2'
+      marginVertical: 40
     },
     logo: {
       // width: '100%',
       maxWidth: 300,
       maxHeight: 200,
+      margin: 30
     },
     title: {
       fontSize: 24,
       fontWeight: 'bold',
       color: '#051C60',
       margin: 10,
+    },
+    btn: {
+      marginTop: 20
     }
   });
 
