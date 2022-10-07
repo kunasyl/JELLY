@@ -34,38 +34,38 @@ const SignInScreen = () => {
   }
 
   return (
-    <ScrollView showsVerticalScrollIndicator={false}>
-      <View style={styles.root}>
-        <Image 
-          source={Logo} 
-          style={[styles.logo, {height: height*0.3}]} 
-          resizeMode="contain"/>
+    <View style={styles.root}>
+      <Image 
+        source={Logo} 
+        style={[styles.logo, {height: height*0.3}]} 
+        resizeMode="contain"/>
 
-      <CustomInput
-        value={email} 
-        setValue={setEmail}
-        placeholder={"Email"}
-      />
-      <CustomInput
-        value={password} 
-        setValue={setPassword}
-        secureTextEntry={true}
-        placeholder={"Password"}
-      />
-
-      <CustomButton 
-        text="Forgot the password?" 
-        onPress={onForgotPasswordInPressed}
-        type="TERTIARY"
-        style={styles.leftBtn}
-      />
+      <View style={styles.inputBox}>
+        <CustomInput
+          value={email} 
+          setValue={setEmail}
+          placeholder={"Email"}
+        />
+        <CustomInput
+          value={password} 
+          setValue={setPassword}
+          secureTextEntry={true}
+          placeholder={"Password"}
+        />
+        <View style={styles.btnFoggotPassword}>
+          <CustomButton 
+            text="Forgot the password?" 
+            onPress={onForgotPasswordInPressed}
+            type="TERTIARY"
+          />
+        </View>
+      </View>
 
       <CustomButton 
         text="Login" 
-        onPress={onSignInPressed} 
-        style={styles.loginBtn}/>
+        onPress={onSignInPressed}
+      />
       
-
       {/* <SocialSignInButtons/> */}
 
       <CustomButton
@@ -73,37 +73,33 @@ const SignInScreen = () => {
         onPress={onSignUpPressed}
         type="TERTIARY"
       />
-      
-      </View>
-    </ScrollView>
+    
+    </View>
   )
 }
 
 const styles = StyleSheet.create({
     root: {
-      height: '100%',
+      flex: 1,
       alignItems: 'center',
-      paffing: 10,
       backgroundColor: '#FFFFFF',
-      // position: 'relative'
-      // display: "flex",
-      // flexDirection: "column"
+      justifyContent: 'space-around'
     },
     logo: {
-      marginTop: 60,
-      marginBottom: 40,
-      maxWidth: 300,
-      maxHeight: 200,
-      boxShadow: 10,
+      minWidth: '80%',
+      minHeight: 200,
     },
-    loginBtn:{
-      marginTop: 20,
+    inputBox:{
+      width: '90%',
+      alignItems: 'center',
+      flexDirection: 'column',
+      justifyContent: 'space-between',
     },
-    leftBtn: {
-      // position: 'absolute',
-    // width: '100%'
-      textAlign: 'right',
-      // marginRight: -20,
+    btnFoggotPassword:{
+      width: '90%',
+      display: 'flex',
+      alignItems: 'flex-end',
+      textAlign: 'center',
     }
   });
 
