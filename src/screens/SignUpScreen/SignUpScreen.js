@@ -43,14 +43,13 @@ const SignUpScreen = () => {
   }
 
   return (
-    <ScrollView showsVerticalScrollIndicator={false}>
-      <View style={styles.root}>
-        <Image 
-          source={SingUpPng} 
-          style={styles.logo} 
-          resizeMode="contain"/>
-          
-      
+    <View style={styles.root}>
+      <Image 
+        source={SingUpPng} 
+        style={styles.logo} 
+        resizeMode="contain"/>
+        
+      <View style={styles.inputBox}>
         <CustomInput
           placeholder="Username"
           value={username} 
@@ -73,37 +72,36 @@ const SignUpScreen = () => {
           setValue={setPasswordRepeat}
           secureTextEntry={true}
         />
-
-        <CustomButton 
-          text="Sign Up" 
-          onPress={onRegisterPressed}
-          style={styles.btn}
-        />
-      
-        {/* <SocialSignInButtons/> */}
-
-        <CustomButton
-          text={"Do you have an account? Sign in"}
-          onPress={onSignInPressed}
-          type="TERTIARY"
-        />
-        
       </View>
-    </ScrollView>
+
+      <CustomButton 
+        text="Sign Up" 
+        onPress={onRegisterPressed}
+        style={styles.btn}
+      />
+    
+      {/* <SocialSignInButtons/> */}
+
+      <CustomButton
+        text={"Do you have an account? Sign in"}
+        onPress={onSignInPressed}
+        type="TERTIARY"
+      />
+      
+    </View>
   )
 }
 
 const styles = StyleSheet.create({
     root: {
+      flex: 1,
       alignItems: 'center',
-      paffing: 10,
-      marginVertical: 40
+      backgroundColor: '#FFFFFF',
+      justifyContent: 'space-around'
     },
     logo: {
-      // width: '100%',
-      maxWidth: 300,
-      maxHeight: 200,
-      margin: 30
+      minWidth: '80%',
+      minHeight: 200,
     },
     title: {
       fontSize: 24,
@@ -112,7 +110,14 @@ const styles = StyleSheet.create({
       margin: 10,
     },
     btn: {
-      marginTop: 20
+      marginTop: 0
+    },
+    inputBox:{
+      width: '90%',
+      alignItems: 'center',
+      flexDirection: 'column',
+      justifyContent: 'space-between',
+      // flexWrap: 'wrap'
     }
   });
 
