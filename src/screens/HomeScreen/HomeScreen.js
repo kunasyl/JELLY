@@ -1,18 +1,33 @@
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import React from 'react'
 
-const HomeScreen = () => {
+const HomeScreen = ({navigation, route}) => {
   return (
-    <View style={styles.container}>
-      <Text style={{alignSelf: 'center'}}>Welcome to the JELLY app!</Text>
+    <View>
+      <Text style={styles.myText}>Welcome to the JELLY app, {route.params?.email}!</Text>
+      {/* ДЛЯ ТЕСТА НАВИГАЦИИ ВНУТРИ STACKNAVIGATION */}
+      <TouchableOpacity style={styles.Button} onPress={() => navigation.navigate('ConfirmEmail')}>
+        <Text styel={styles.ButtonText}>Click me</Text>
+      </TouchableOpacity>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
-  container: {
-    marginVertical: 100,
+  myText: {
+    color: 'black',
+    textAlign: 'center',
+    fontSize: 18
   },
+  Button: {
+    backgroundColor: 'purple',
+    paddingHorizontal: 10,
+    paddingVertical: 6,
+    width: '50%'
+  },
+  ButtonText: {
+    fontSize: 18
+  }
 });
 
 export default HomeScreen
