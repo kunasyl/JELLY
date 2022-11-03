@@ -3,22 +3,22 @@ import React, {useState} from 'react'
 import Logo from '../../../assets/sign_in.png'
 import CustomInput from '../../components/CustomInput'
 import CustomButton from '../../components/CustomButton'
-import SocialSignInButtons from '../../components/SocialSignInButtons'
-import { useNavigation } from '@react-navigation/native'
+// import SocialSignInButtons from '../../components/SocialSignInButtons'
+// import { useNavigation } from '@react-navigation/native'
 import { auth, user } from '../../../firebase'
 
 
-const SignInScreen = () => {
+const SignInScreen = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const {height} = useWindowDimensions();
-  const navigation = useNavigation();
+  // const navigation = useNavigation();
 
   const onSignInPressed = () => {
     auth
       .signInWithEmailAndPassword(email, password)
       .then(userCredentials => {
-        navigation.navigate('Home')
+        navigation.navigate('Home', {email: email})
         const user = userCredentials.user;
         console.log('Logged in with:', user.email);
       })
