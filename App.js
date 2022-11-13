@@ -15,28 +15,34 @@ import {
 import { useState, useEffect, useLayoutEffect } from 'react'
 
 // import Navigation from './src/navigation';
-import { NavigationContainer, StackActions } from '@react-navigation/native';
+import { NavigationContainer, StackActions } from '@react-navigation/native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import { getFocusedRouteNameFromRoute } from '@react-navigation/native'
 // import { Ionicons } from "@expo/vector-icons";
-import { MaterialIcons } from "@expo/vector-icons";
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { MaterialIcons } from "@expo/vector-icons"
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
 // TabNavigator
 import TimerScreen from './src/screens/TimerScreen'
-import DiaryScreen from './src/screens/DiaryScreen';
-import ChatScreen from './src/screens/ChatScreen';
-import ProfileScreen from './src/screens/ProfileScreen';
+import DiaryScreen from './src/screens/DiaryScreen'
+import ChatScreen from './src/screens/ChatScreen'
+import ProfileScreen from './src/screens/ProfileScreen'
 
 // HomeNavigator
-import SignInScreen from './src/screens/SignInScreen';
-import SignUpScreen from './src/screens/SignUpScreen';
-import ConfirmEmailScreen from './src/screens/ConfirmEmailScreen';
-import ForgotPasswordScreen from './src/screens/ForgotPasswordScreen';
-import NewPasswordScreen from './src/screens/NewPasswordScreen/NewPasswordScreen';
+import SignInScreen from './src/screens/SignInScreen'
+import SignUpScreen from './src/screens/SignUpScreen'
+import ConfirmEmailScreen from './src/screens/ConfirmEmailScreen'
+import ForgotPasswordScreen from './src/screens/ForgotPasswordScreen'
+import NewPasswordScreen from './src/screens/NewPasswordScreen/NewPasswordScreen'
 import HomeScreen from './src/screens/HomeScreen';
 
+import Magnifier from './assets/magnifier.svg'
+import Clock from './assets/clock.svg'
+import Book from '../../../assets/book.svg'
+import Chat from '../../../assets/chat.svg'
+import Profile from '../../../assets/profile.svg'
+x
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
@@ -68,6 +74,7 @@ export default function App() {
     }, [navigation, route]);
     return (
         <Stack.Navigator>
+          <Stack.Screen name="Home" component={HomeScreen}/>
           <Stack.Screen 
           name="SignIn" 
           component={SignInScreen}
@@ -76,8 +83,7 @@ export default function App() {
           <Stack.Screen name="ConfirmEmail" component={ConfirmEmailScreen}/>
           <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen}/>
           <Stack.Screen name="NewPassword" component={NewPasswordScreen}/>
-          <Stack.Screen name="Home" component={HomeScreen}/>
-          </Stack.Navigator>
+        </Stack.Navigator>
     )
   }
 
