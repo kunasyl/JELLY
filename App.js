@@ -10,6 +10,7 @@ import {
   Image,
   Button,
   Linking,
+  TouchableOpacity,
 } from 'react-native';
 
 import { useState, useEffect, useLayoutEffect } from 'react'
@@ -20,8 +21,9 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native'
 // import { Ionicons } from "@expo/vector-icons";
-import { MaterialIcons } from "@expo/vector-icons"
+import { AntDesign, MaterialIcons } from "@expo/vector-icons";
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import { COLORS } from './src/styles/colors';
 
 // TabNavigator
 import TimerScreen from './src/screens/TimerScreen'
@@ -37,13 +39,10 @@ import ForgotPasswordScreen from './src/screens/ForgotPasswordScreen'
 import NewPasswordScreen from './src/screens/NewPasswordScreen/NewPasswordScreen'
 import HomeScreen from './src/screens/HomeScreen';
 
-import { NativeBaseProvider, Box } from "native-base";
+import { NativeBaseProvider, Box, Icon } from "native-base";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
-
-const customPurple = 'rgb(119,83,111)';
-const customOrange = 'rgb(229,133,0)';
 
 export default function App() {
   const [firstLaunch, setFirstLaunch] = useState(null);
@@ -86,8 +85,8 @@ export default function App() {
         <Tab.Navigator        
         tabBarOptions={{
           labelStyle:{fontSize:12},
-          activeTintColor: customOrange,
-          inactiveTintColor: customPurple,
+          activeTintColor: COLORS.orange,
+          inactiveTintColor: COLORS.purple,
           showIcon: true,
         }}>
           <Tab.Screen 
@@ -96,7 +95,7 @@ export default function App() {
           options={{
             headerShown: false,
             tabBarIcon: (props) => (
-              <MaterialIcons name="search" size={30} color={props.focused?customOrange:customPurple}/>
+              <MaterialIcons name="search" size={30} color={props.focused?COLORS.orange:COLORS.purple}/>
             )
           }}
         />
@@ -104,9 +103,9 @@ export default function App() {
           name="Timer" 
           component={TimerScreen}
           options={{
-            headerShown: false,
+            // headerShown: false,
             tabBarIcon: (props) => (
-              <MaterialIcons name="timer" size={30} color={props.focused?customOrange:customPurple}/>
+              <MaterialIcons name="timer" size={30} color={props.focused?COLORS.orange:COLORS.purple}/>
             )
           }}
           />
@@ -114,19 +113,29 @@ export default function App() {
           name="Diary" 
           component={DiaryScreen}
           options={{
-            headerShown: false,
+            // headerShown: false,
             tabBarIcon: (props) => (
-              <MaterialIcons name="book" size={30} color={props.focused?customOrange:customPurple}/>
-            )
+              <MaterialIcons name="book" size={30} color={props.focused?COLORS.orange:COLORS.purple}/>
+            ),
+            // headerRight: () => (
+            //   // <TouchableOpacity>
+            //   // {/* // onPress={() => navigation.setParams({search: 0})} style={{ marginHorizontal: 10 }}> */}
+            //   <NativeBaseProvider>
+            //     <Icon color="white" as={AntDesign} 
+            //       name="search1" 
+            //       size="md" />
+            //   </NativeBaseProvider>
+            //   // </TouchableOpacity>
+            // )
           }}
           />
           <Tab.Screen 
           name="Chat" 
           component={ChatScreen}
           options={{
-            headerShown: false,
+            // headerShown: false,
             tabBarIcon: (props) => (
-              <MaterialIcons name="chat-bubble-outline" size={30} color={props.focused?customOrange:customPurple}/>
+              <MaterialIcons name="chat-bubble-outline" size={30} color={props.focused?COLORS.orange:COLORS.purple}/>
             )
           }}
           />
@@ -134,9 +143,9 @@ export default function App() {
           name="Profile" 
           component={ProfileScreen}
           options={{
-            headerShown: false,
+            // headerShown: false,
             tabBarIcon: (props) => (
-              <MaterialIcons name="person-outline" size={30} color={props.focused?customOrange:customPurple}/>
+              <MaterialIcons name="person-outline" size={30} color={props.focused?COLORS.orange:COLORS.purple}/>
             )
           }}
           />
