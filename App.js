@@ -37,12 +37,8 @@ import ForgotPasswordScreen from './src/screens/ForgotPasswordScreen'
 import NewPasswordScreen from './src/screens/NewPasswordScreen/NewPasswordScreen'
 import HomeScreen from './src/screens/HomeScreen';
 
-import Magnifier from './assets/magnifier.svg'
-import Clock from './assets/clock.svg'
-import Book from '../../../assets/book.svg'
-import Chat from '../../../assets/chat.svg'
-import Profile from '../../../assets/profile.svg'
-x
+import { NativeBaseProvider, Box } from "native-base";
+
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
@@ -73,17 +69,17 @@ export default function App() {
       }
     }, [navigation, route]);
     return (
-        <Stack.Navigator>
-          <Stack.Screen name="Home" component={HomeScreen}/>
-          <Stack.Screen 
-          name="SignIn" 
-          component={SignInScreen}
-          />
-          <Stack.Screen name="SignUp" component={SignUpScreen}/>
-          <Stack.Screen name="ConfirmEmail" component={ConfirmEmailScreen}/>
-          <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen}/>
-          <Stack.Screen name="NewPassword" component={NewPasswordScreen}/>
-        </Stack.Navigator>
+      <Stack.Navigator>
+        <Stack.Screen 
+        name="SignIn" 
+        component={SignInScreen}
+        />
+        <Stack.Screen name="SignUp" component={SignUpScreen}/>
+        <Stack.Screen name="ConfirmEmail" component={ConfirmEmailScreen}/>
+        <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen}/>
+        <Stack.Screen name="NewPassword" component={NewPasswordScreen}/>
+        <Stack.Screen name="Home" component={HomeScreen}/>
+      </Stack.Navigator>
     )
   }
 
