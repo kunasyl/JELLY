@@ -7,7 +7,7 @@ import { getFocusedRouteNameFromRoute } from '@react-navigation/native'
 import { AntDesign, MaterialIcons } from "@expo/vector-icons";
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { COLORS } from './src/styles/colors';
+import { COLORS } from './src/styles/colors'
 
 // TabNavigator
 import TimerScreen from './src/screens/TimerScreen'

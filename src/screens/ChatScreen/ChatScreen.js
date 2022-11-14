@@ -1,6 +1,7 @@
 import { Image, StyleSheet, useWindowDimensions, ScrollView } from 'react-native'
 import React, {useState} from 'react'
 import { useNavigation } from '@react-navigation/native'
+import { COLORS } from '../../styles/colors'
 
 import { NativeBaseProvider, Text, Box, Heading, Spacer, Avatar, FlatList, HStack, VStack, Input,
 Container, Header, Title, Button, Left, Right, Body, Icon, Center} from "native-base";
@@ -84,34 +85,34 @@ const ChatScreen = () => {
 
   return (
     <NativeBaseProvider>
-      <Container w="100%" h="100%" mx="10" my="20">
-          <VStack w="100%">
-            <Box maxH="85%" minH="80%">
+      <Container w="100%" h="100%" mx="10">
+          <VStack w="100%" justifyContent="space-between">
+            <Box maxH="90%" minH="80%">
               <ScrollView>
                 <FlatList data={data} renderItem={({item}) => 
                 <Box borderBottomWidth="1" _dark={{ borderColor: "muted.50"}} borderColor="muted.800" pl={["0", "4"]} pr={["0", "5"]}py="2">
                   <HStack space={[2, 3]} justifyContent="space-between">
                     <Avatar size="48px" source={{uri: item.avatarUrl}} />
                     <VStack>
-                      <Text _dark={{color: "warmGray.50"}} color="coolGray.800" bold>
+                      <Text _dark={{color: "warmGray.50"}} color={COLORS.dark} bold>
                         {item.fullName}
                       </Text>
-                      <Text color="coolGray.600" _dark={{color: "warmGray.200"}}>
+                      <Text color={COLORS.dark} _dark={{color: "warmGray.200"}}>
                         {item.recentText} 
                       </Text>
                     </VStack>
-                    <Spacer />
-                    <Text fontSize="xs" _dark={{color: "warmGray.50"}} color="coolGray.800" alignSelf="flex-start">
+                    <Spacer ccolor={COLORS.dark} />
+                    <Text fontSize="xs" _dark={{color: "warmGray.50"}} color={COLORS.purple} alignSelf="flex-start">
                       {item.timeStamp}
                     </Text>
                   </HStack>
-                </Box>} keyExtractor={item => item.id} />
+                </Box>} keyExtractor={item => item.id} /> 
               </ScrollView>
             </Box> 
             <Box>
-              <Input py="0" my="5" InputRightElement={
-                <Button size="xs" rounded="none" w="1/6" onPress={SendMessage}> Send </Button>} 
-              placeholder="message" />
+              <Input style={{backgroundColor: COLORS.grey}} py="0" px="5" my="5" InputRightElement={
+                <Button  size="xs" rounded="50" w="1/5" style={{backgroundColor: COLORS.purple}} onPress={SendMessage}> Send </Button>} 
+              placeholder="message" variant="rounded"/>
             </Box>
           </VStack>
       </Container>
