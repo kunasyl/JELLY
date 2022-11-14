@@ -1,25 +1,9 @@
-//import { StatusBar } from 'expo-status-bar';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-  Image,
-  Button,
-  Linking,
-} from 'react-native';
-
+import {StyleSheet} from 'react-native';
 import { useState, useEffect, useLayoutEffect } from 'react'
-
-// import Navigation from './src/navigation';
 import { NavigationContainer, StackActions } from '@react-navigation/native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native'
-// import { Ionicons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons"
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
@@ -36,8 +20,6 @@ import ConfirmEmailScreen from './src/screens/ConfirmEmailScreen'
 import ForgotPasswordScreen from './src/screens/ForgotPasswordScreen'
 import NewPasswordScreen from './src/screens/NewPasswordScreen/NewPasswordScreen'
 import HomeScreen from './src/screens/HomeScreen';
-
-import { NativeBaseProvider, Box } from "native-base";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -70,12 +52,12 @@ export default function App() {
     }, [navigation, route]);
     return (
       <Stack.Navigator>
+        <Stack.Screen name="Home" component={HomeScreen}/>
         <Stack.Screen name="SignIn" component={SignInScreen}/>
         <Stack.Screen name="SignUp" component={SignUpScreen}/>
         <Stack.Screen name="ConfirmEmail" component={ConfirmEmailScreen}/>
         <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen}/>
         <Stack.Screen name="NewPassword" component={NewPasswordScreen}/>
-        <Stack.Screen name="Home" component={HomeScreen}/>
       </Stack.Navigator>
     )
   }
