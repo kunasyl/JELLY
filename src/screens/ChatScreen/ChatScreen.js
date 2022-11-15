@@ -1,5 +1,5 @@
 import { Image, StyleSheet, useWindowDimensions, ScrollView } from 'react-native'
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { COLORS } from '../../styles/colors'
 
@@ -7,81 +7,33 @@ import { NativeBaseProvider, Text, Box, Heading, Spacer, Avatar, FlatList, HStac
 Container, Header, Title, Button, Left, Right, Body, Icon, Center} from "native-base";
 
 const ChatScreen = () => {
-  const data = [{
-    id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-    fullName: 'Afreen Khan',
-    timeStamp: '12:47 PM',
-    recentText: 'Good Day!',
-    avatarUrl: 'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
-  }, {
-    id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-    fullName: 'Sujita Mathur',
-    timeStamp: '11:11 PM',
-    recentText: 'Cheer up, there!',
-    avatarUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyEaZqT3fHeNrPGcnjLLX1v_W4mvBlgpwxnA&usqp=CAU'
-  }, {
-    id: '58694a0f-3da1-471f-bd96-145571e29d72',
-    fullName: 'Anci Barroco',
-    timeStamp: '6:22 PM',
-    recentText: 'Good Day!',
-    avatarUrl: 'https://miro.medium.com/max/1400/0*0fClPmIScV5pTLoE.jpg'
-  },{
-    id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-    fullName: 'Afreen Khan',
-    timeStamp: '12:47 PM',
-    recentText: 'Good Day!',
-    avatarUrl: 'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
-  }, {
-    id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-    fullName: 'Sujita Mathur',
-    timeStamp: '11:11 PM',
-    recentText: 'Cheer up, there!',
-    avatarUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyEaZqT3fHeNrPGcnjLLX1v_W4mvBlgpwxnA&usqp=CAU'
-  }, {
-    id: '58694a0f-3da1-471f-bd96-145571e29d72',
-    fullName: 'Anci Barroco',
-    timeStamp: '6:22 PM',
-    recentText: 'Good Day!',
-    avatarUrl: 'https://miro.medium.com/max/1400/0*0fClPmIScV5pTLoE.jpg'
-  },{
-    id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-    fullName: 'Afreen Khan',
-    timeStamp: '12:47 PM',
-    recentText: 'Good Day!',
-    avatarUrl: 'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
-  }, {
-    id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-    fullName: 'Sujita Mathur',
-    timeStamp: '11:11 PM',
-    recentText: 'Cheer up, there!',
-    avatarUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyEaZqT3fHeNrPGcnjLLX1v_W4mvBlgpwxnA&usqp=CAU'
-  }, {
-    id: '58694a0f-3da1-471f-bd96-145571e29d72',
-    fullName: 'Anci Barroco',
-    timeStamp: '6:22 PM',
-    recentText: 'Good Day!',
-    avatarUrl: 'https://miro.medium.com/max/1400/0*0fClPmIScV5pTLoE.jpg'
-  },{
-    id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-    fullName: 'Afreen Khan',
-    timeStamp: '12:47 PM',
-    recentText: 'Good Day!',
-    avatarUrl: 'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
-  }, {
-    id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-    fullName: 'Sujita Mathur',
-    timeStamp: '11:11 PM',
-    recentText: 'Cheer up, there!',
-    avatarUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyEaZqT3fHeNrPGcnjLLX1v_W4mvBlgpwxnA&usqp=CAU'
-  }, {
-    id: '58694a0f-3da1-471f-bd96-145571e29d72',
-    fullName: 'Anci Barroco',
-    timeStamp: '6:22 PM',
-    recentText: 'Good Day!',
-    avatarUrl: 'https://miro.medium.com/max/1400/0*0fClPmIScV5pTLoE.jpg'
-  }];
-  
-  const SendMessage = () => setShow(!show);
+  const [messages, setMessage] = useState([]);
+
+  const getMessage = async (messages) => {
+    const response = await fetch('http://146.185.154.90:8000/messages');
+    const data = await response.json();
+
+    messages = data.map(content => {
+      const newMessage = {
+        id: content._id + Date.now(),
+        message: content.message,
+        author: content.author,
+        date: content.datetime
+      };
+      return newMessage;
+    }).reverse();
+    
+    setMessage(messages);
+  };
+
+  const SendMessage = () => {
+    
+  };
+
+  useEffect(() => {
+    let messagesCopy = [...messages];
+    getMessage(messagesCopy);
+  }, [messages]);
 
   return (
     <NativeBaseProvider>
@@ -89,21 +41,24 @@ const ChatScreen = () => {
           <VStack w="100%" justifyContent="space-between">
             <Box maxH="90%" minH="80%">
               <ScrollView>
-                <FlatList data={data} renderItem={({item}) => 
+                <FlatList data={messages} renderItem={({item}) => 
                 <Box borderBottomWidth="1" _dark={{ borderColor: "muted.50"}} borderColor="muted.800" pl={["0", "4"]} pr={["0", "5"]}py="2">
                   <HStack space={[2, 3]} justifyContent="space-between">
-                    <Avatar size="48px" source={{uri: item.avatarUrl}} />
+                  <Avatar size="48px" source={{uri: 'https://cdn2.iconfinder.com/data/icons/audio-16/96/user_avatar_profile_login_button_account_member-512.png'}} />
                     <VStack>
                       <Text _dark={{color: "warmGray.50"}} color={COLORS.dark} bold>
-                        {item.fullName}
+                        {item.author}
                       </Text>
                       <Text color={COLORS.dark} _dark={{color: "warmGray.200"}}>
-                        {item.recentText}
+                        {item.message}
                       </Text>
                     </VStack>
                     <Spacer ccolor={COLORS.dark} />
                     <Text fontSize="xs" _dark={{color: "warmGray.50"}} color={COLORS.purple} alignSelf="flex-start">
-                      {item.timeStamp}
+                      {new Date(Date(item.datetime)).toLocaleDateString()}
+                    </Text>
+                    <Text fontSize="xs" _dark={{color: "warmGray.50"}} color={COLORS.purple} alignSelf="flex-start">
+                      {new Date(Date(item.datetime)).toLocaleTimeString()}
                     </Text>
                   </HStack>
                 </Box>} keyExtractor={item => item.id} /> 
