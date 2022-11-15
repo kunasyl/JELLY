@@ -8,12 +8,16 @@ import { AntDesign, MaterialIcons } from "@expo/vector-icons";
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { COLORS } from './src/styles/colors'
+import { Box, Center, Fab, Icon, NativeBaseProvider, VStack, Heading, Input, HStack, Container } from 'native-base'
 
 // TabNavigator
 import TimerScreen from './src/screens/TimerScreen'
 import DiaryScreen from './src/screens/DiaryScreen'
 import ChatScreen from './src/screens/ChatScreen'
 import ProfileScreen from './src/screens/ProfileScreen'
+
+// DiaryNavigator
+import NewDiaryScreen from './src/screens/NewDiaryScreen/NewDiaryScreen';
 
 // HomeNavigator
 import SignInScreen from './src/screens/SignInScreen'
@@ -51,12 +55,21 @@ export default function App() {
     }, [navigation, route]);
     return (
       <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen}/>
         <Stack.Screen name="SignIn" component={SignInScreen}/>
         <Stack.Screen name="SignUp" component={SignUpScreen}/>
         <Stack.Screen name="ConfirmEmail" component={ConfirmEmailScreen}/>
         <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen}/>
         <Stack.Screen name="NewPassword" component={NewPasswordScreen}/>
+        <Stack.Screen name="Home" component={HomeScreen}/>
+      </Stack.Navigator>
+    )
+  }
+
+  const DiaryNavigator = () => {
+    return (
+      <Stack.Navigator>
+        <Stack.Screen name="Diary" component={DiaryScreen}/>
+        <Stack.Screen name="NewDiary" component={NewDiaryScreen}/>
       </Stack.Navigator>
     )
   }
@@ -93,22 +106,12 @@ export default function App() {
           />
           <Tab.Screen 
           name="Diary" 
-          component={DiaryScreen}
+          component={DiaryNavigator}
           options={{
-            // headerShown: false,
+            headerShown: false,
             tabBarIcon: (props) => (
               <MaterialIcons name="book" size={30} color={props.focused?COLORS.orange:COLORS.purple}/>
-            ),
-            // headerRight: () => (
-            //   // <TouchableOpacity>
-            //   // {/* // onPress={() => navigation.setParams({search: 0})} style={{ marginHorizontal: 10 }}> */}
-            //   <NativeBaseProvider>
-            //     <Icon color="white" as={AntDesign} 
-            //       name="search1" 
-            //       size="md" />
-            //   </NativeBaseProvider>
-            //   // </TouchableOpacity>
-            // )
+            )
           }}
           />
           <Tab.Screen 

@@ -85,7 +85,8 @@ const ChatScreen = () => {
 
   return (
     <NativeBaseProvider>
-      <Container w="100%" h="100%" mx="10">
+      {/* <Container w="100%" h="100%" mx="10"> */}
+      <Center mx="2">
           <VStack w="100%" justifyContent="space-between">
             <Box maxH="90%" minH="80%">
               <ScrollView>
@@ -111,11 +112,12 @@ const ChatScreen = () => {
             </Box> 
             <Box>
               <Input style={{backgroundColor: COLORS.grey}} py="0" px="5" my="5" InputRightElement={
-                <Button  size="xs" rounded="50" w="1/5" style={{backgroundColor: COLORS.purple}} onPress={SendMessage}> Send </Button>} 
+                <Button  size="sm" rounded="50" w="1/5" style={{backgroundColor: COLORS.purple}} onPress={SendMessage}> Send </Button>} 
               placeholder="message" variant="rounded"/>
             </Box>
           </VStack>
-      </Container>
+      {/* </Container> */}
+      </Center>
     </NativeBaseProvider>
   )
 }
