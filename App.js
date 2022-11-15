@@ -25,7 +25,7 @@ import SignUpScreen from './src/screens/SignUpScreen'
 import ConfirmEmailScreen from './src/screens/ConfirmEmailScreen'
 import ForgotPasswordScreen from './src/screens/ForgotPasswordScreen'
 import NewPasswordScreen from './src/screens/NewPasswordScreen/NewPasswordScreen'
-import HomeScreen from './src/screens/HomeScreen';
+import HomeScreen from './src/screens/HomeScreen'
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
