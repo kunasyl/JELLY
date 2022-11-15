@@ -1,3 +1,7 @@
+import { Provider } from "react-redux";
+import { configureStore } from "@reduxjs/toolkit";
+import chatReducer from "./src/Store/Services/chatSlice";
+
 import {StyleSheet} from 'react-native';
 import { useState, useEffect, useLayoutEffect } from 'react'
 import { NavigationContainer, StackActions } from '@react-navigation/native'
@@ -74,8 +78,15 @@ export default function App() {
     )
   }
 
+
+  const store = configureStore({
+    reducer: chatReducer
+  });  
+
+
   return (
-    firstLaunch != null && (
+    <Provider store={store}>
+    {firstLaunch != null && (
       <NavigationContainer>
         <Tab.Navigator        
         tabBarOptions={{
@@ -136,7 +147,8 @@ export default function App() {
           />
         </Tab.Navigator>
       </NavigationContainer>
-    )
+    )}
+    </Provider>
   );
 }
 
