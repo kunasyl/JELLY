@@ -85,7 +85,6 @@ const ChatScreen = () => {
 
   return (
     <NativeBaseProvider>
-      {/* <Container w="100%" h="100%" mx="10"> */}
       <Center mx="2">
           <VStack w="100%" justifyContent="space-between">
             <Box maxH="90%" minH="80%">
@@ -99,7 +98,7 @@ const ChatScreen = () => {
                         {item.fullName}
                       </Text>
                       <Text color={COLORS.dark} _dark={{color: "warmGray.200"}}>
-                        {item.recentText} 
+                        {item.recentText}
                       </Text>
                     </VStack>
                     <Spacer ccolor={COLORS.dark} />
@@ -112,11 +111,10 @@ const ChatScreen = () => {
             </Box> 
             <Box>
               <Input style={{backgroundColor: COLORS.grey}} py="0" px="5" my="5" InputRightElement={
-                <Button  size="sm" rounded="50" w="1/5" style={{backgroundColor: COLORS.purple}} onPress={SendMessage}> Send </Button>} 
-              placeholder="message" variant="rounded"/>
+                <Button  size="sm" rounded="50" w="1/5" style={{backgroundColor: COLORS.purple}} onPress={SendMessage}> Send </Button>}
+              placeholder="message" variant="rounded" value='Hello world'/>
             </Box>
           </VStack>
-      {/* </Container> */}
       </Center>
     </NativeBaseProvider>
   )
