@@ -22,14 +22,14 @@ const SignUpScreen = () => {
       auth
       .createUserWithEmailAndPassword(email, password)
       .then(userCredentials => {
-        auth.updateProfile(/*auth.currentUser,*/ {
-          displayName: username
-        })
-        .then(() => {
+        // auth.updateProfile(/*auth.currentUser,*/ {
+        //   displayName: username
+        // })
+        // .then(() => {
           navigation.navigate('Home');
           const user = userCredentials.user;
           console.log('Registered with:', user.email);
-        })
+        // })
       })
       .catch(error => alert(error.message))
     }
