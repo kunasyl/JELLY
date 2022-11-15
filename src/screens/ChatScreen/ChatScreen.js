@@ -6,32 +6,34 @@ import { COLORS } from '../../styles/colors'
 import { NativeBaseProvider, Text, Box, Heading, Spacer, Avatar, FlatList, HStack, VStack, Input,
 Container, Header, Title, Button, Left, Right, Body, Icon, Center} from "native-base";
 
-const postMessage = (message, author) => {
-  fetch('http://146.185.154.90:8000/messages', {
-        method: 'POST',
-        body: new URLSearchParams({
-            message: message,
-            author: author
-        })
-    }).then(res => {
-        return res.json();
-    });
-};
+const ChatScreen = () => {
+  const [messages, setMessage] = useState([]);
 
+  const getMessage = async (messages) => {
+    const response = await fetch('http://146.185.154.90:8000/messages');
+    const data = await response.json();
 
-const ChatScreen = async () => {
-  const [messages, setMessages] = useState([]);
-  const [submitState, setSubmitState] = useState(false);
-
-  const [valueAuthor] = useState('JELLY');
-  const [valueMessage, setValueMessage] = useState('');
-  
-  const changeMessage = (event) => {
-    setValueMessage(event.target.value);
+    messages = data.map(content => {
+      const newMessage = {
+        id: content._id + Date.now(),
+        message: content.message,
+        author: content.author,
+        date: content.datetime
+      };
+      return newMessage;
+    }).reverse();
+    
+    setMessage(messages);
   };
 
-  const SendMessage = () => {};
+  const SendMessage = () => {
+    
+  };
 
+  useEffect(() => {
+    let messagesCopy = [...messages];
+    getMessage(messagesCopy);
+  }, [messages]);
 
   return (
     <NativeBaseProvider>
@@ -39,10 +41,10 @@ const ChatScreen = async () => {
           <VStack w="100%" justifyContent="space-between">
             <Box maxH="90%" minH="80%">
               <ScrollView>
-                {/* <FlatList data={messages} renderItem={({item}) => 
+                <FlatList data={messages} renderItem={({item}) => 
                 <Box borderBottomWidth="1" _dark={{ borderColor: "muted.50"}} borderColor="muted.800" pl={["0", "4"]} pr={["0", "5"]}py="2">
                   <HStack space={[2, 3]} justifyContent="space-between">
-                    <Avatar size="48px" source={{uri: 'https://picsum.photos/id/237/200/300'}} />
+                  <Avatar size="48px" source={{uri: 'https://cdn2.iconfinder.com/data/icons/audio-16/96/user_avatar_profile_login_button_account_member-512.png'}} />
                     <VStack>
                       <Text _dark={{color: "warmGray.50"}} color={COLORS.dark} bold>
                         {item.author}
@@ -53,7 +55,10 @@ const ChatScreen = async () => {
                     </VStack>
                     <Spacer ccolor={COLORS.dark} />
                     <Text fontSize="xs" _dark={{color: "warmGray.50"}} color={COLORS.purple} alignSelf="flex-start">
-                      {item.datetime}
+                      {new Date(Date(item.datetime)).toLocaleDateString()}
+                    </Text>
+                    <Text fontSize="xs" _dark={{color: "warmGray.50"}} color={COLORS.purple} alignSelf="flex-start">
+                      {new Date(Date(item.datetime)).toLocaleTimeString()}
                     </Text>
                   </HStack>
                 </Box>} keyExtractor={item => item._id} />  */}
