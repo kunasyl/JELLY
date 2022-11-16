@@ -90,26 +90,24 @@ const ChatScreen = () => {
       <Center mx="2">
           <VStack w="100%" justifyContent="space-between">
             <Box maxH="90%" minH="80%">
-              <ScrollView>
-                <FlatList data={messages} renderItem={({item}) => 
-                <Box borderBottomWidth="1" _dark={{ borderColor: "muted.50"}} borderColor="muted.800" pl={["0", "4"]} pr={["0", "5"]}py="2">
-                  <HStack space={[2, 3]} justifyContent="space-between">
-                  <Avatar size="48px" source={{uri: 'https://cdn2.iconfinder.com/data/icons/audio-16/96/user_avatar_profile_login_button_account_member-512.png'}} />
-                    <VStack>
-                      <Text _dark={{color: "warmGray.50"}} color={COLORS.dark} bold>
-                        {item?.author}
-                      </Text>
-                      <Text color={COLORS.dark} _dark={{color: "warmGray.200"}}>
-                        {item?.message}
-                      </Text>
-                    </VStack>
-                    <Spacer ccolor={COLORS.dark} />
-                    <Text fontSize="xs" _dark={{color: "warmGray.50"}} color={COLORS.purple} alignSelf="flex-start">
-                      {new Date(Date(item?.datetime)).toLocaleDateString()}
+              <FlatList data={messages} renderItem={({item}) => 
+              <Box borderBottomWidth="1" _dark={{ borderColor: "muted.50"}} borderColor="muted.800" pl={["0", "4"]} pr={["0", "5"]}py="2">
+                <HStack space={[2, 3]} justifyContent="space-between">
+                <Avatar size="48px" source={{uri: 'https://cdn2.iconfinder.com/data/icons/audio-16/96/user_avatar_profile_login_button_account_member-512.png'}} />
+                  <VStack>
+                    <Text _dark={{color: "warmGray.50"}} color={COLORS.dark} bold>
+                      {item?.author}
                     </Text>
-                  </HStack>
-                </Box>} keyExtractor={item => item?._id} />
-              </ScrollView>
+                    <Text color={COLORS.dark} _dark={{color: "warmGray.200"}}>
+                      {item?.message}
+                    </Text>
+                  </VStack>
+                  <Spacer ccolor={COLORS.dark} />
+                  <Text fontSize="xs" _dark={{color: "warmGray.50"}} color={COLORS.purple} alignSelf="flex-start">
+                    {new Date(Date(item?.datetime)).toLocaleDateString()}
+                  </Text>
+                </HStack>
+              </Box>} keyExtractor={item => item?._id} />
             </Box> 
             <Box>
               <Input style={{backgroundColor: COLORS.grey}} py="0" px="5" my="5" onChangeText={changeMessage} InputRightElement={
