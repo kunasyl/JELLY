@@ -64,7 +64,7 @@ const ChatScreen = () => {
       if(lastData.length !== 0) {
         messageObj = lastData.map(content => {
           const newMessage = {
-            id: content._id + uuidv4(),
+            id: content._id + Date.now(),
             message: content.message,
             author: content.author,
             date: content.datetime
@@ -76,7 +76,7 @@ const ChatScreen = () => {
 
     setInterval(() => {
       updateMessage(messageCopy);
-    }, 2000)
+    }, 10000)
   }, [])
 
 
@@ -107,9 +107,9 @@ const ChatScreen = () => {
               </ScrollView>
             </Box> 
             <Box>
-              <Input style={{backgroundColor: COLORS.grey}} py="0" px="5" my="5" InputRightElement={
+              <Input style={{backgroundColor: COLORS.grey}} py="0" px="5" my="5" onChange={setText} InputRightElement={
                 <Button  size="sm" rounded="50" w="1/5" style={{backgroundColor: COLORS.purple}} onPress={SendMessage}> Send </Button>}
-              placeholder="message" variant="rounded" onChangeText={setText} value={text}/>
+              placeholder="message" variant="rounded" value={text}/>
             </Box>
           </VStack>
       </Center>
