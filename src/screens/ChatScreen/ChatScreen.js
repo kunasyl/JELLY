@@ -15,12 +15,11 @@ const ChatScreen = () => {
     setText(text);
   };
 
-
-  const getMessage = async (messages) => {
+  const getMessage = async (message) => {
     const response = await fetch('http://146.185.154.90:8000/messages');
     const data = await response.json();
 
-    messages = data.map(content => {
+    message = data.map(content => {
       const newMessage = {
         id: content._id + Date.now(),
         message: content.message,
@@ -30,60 +29,61 @@ const ChatScreen = () => {
       return newMessage;
     }).reverse();
     
-    setMessage(messages);
+    setMessage(message);
   };
 
-  const postMessage = async (message, author) => {
+  const postMessage = async (messages, authors) => {
       await fetch('http://146.185.154.90:8000/messages', {
           method: 'POST',
           body: new URLSearchParams({
-              message: message,
-              author: author
+              message: messages,
+              author: authors
           })
       }).then(res => {
           return res.json();
       });
   };
 
-  const SendMessage = () => {
-    setSubmitState(!submitState);
-    postMessage(text, 'JELLY');
+  const updateMessage = async (messageObj) => {
+    const response = await fetch('http://146.185.154.90:8000/messages');
+    const data = await response.json();
+    let lastDate = data.slice(-1)[0].datetime;
+
+
+    const lastResponse = await fetch('http://146.185.154.90:8000/messages?datetime=' + `${lastDate}`);
+    const lastData = await lastResponse.json();
+
+    if(lastData.length !== 0) {
+      messageObj = lastData.map(content => {
+        const newMessage = {
+          id: content._id + Date.now(),
+          message: content.message,
+          author: content.author,
+          date: content.datetime
+        };
+        return newMessage;
+      }).reverse();
+    };
   };
+  
 
   useEffect(() => {
-    let messagesCopy = [...messages];
-    getMessage(messagesCopy);
+    let messageCopy = [...messages];
+    getMessage(messageCopy);
   }, [submitState]);
 
   useEffect(() => {
     let messageCopy = [...messages];
-    const updateMessage = async (messageObj) => {
-      const response = await fetch('http://146.185.154.90:8000/messages');
-      const data = await response.json();
-      let lastDate = data.slice(-1)[0].datetime;
-
-
-      const lastResponse = await fetch('http://146.185.154.90:8000/messages?datetime=' + `${lastDate}`);
-      const lastData = await lastResponse.json();
-
-      if(lastData.length !== 0) {
-        messageObj = lastData.map(content => {
-          const newMessage = {
-            id: content._id + Date.now(),
-            message: content.message,
-            author: content.author,
-            date: content.datetime
-          };
-          return newMessage;
-        }).reverse();
-      };
-    };
-
     setInterval(() => {
       updateMessage(messageCopy);
     }, 10000)
   }, [])
 
+  const SendMessage = () => {
+    setSubmitState(!submitState);
+    postMessage(text, 'JELLY');
+    setText('');
+  };
 
   return (
     <NativeBaseProvider>
