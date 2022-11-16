@@ -11,6 +11,11 @@ const ChatScreen = () => {
   const [submitState, setSubmitState] = useState(false);
   const [messages, setMessage] = useState([]);
 
+  const changeMessage = (text ) => {
+    setText(text);
+  };
+
+
   const getMessage = async (messages) => {
     const response = await fetch('http://146.185.154.90:8000/messages');
     const data = await response.json();
@@ -107,7 +112,7 @@ const ChatScreen = () => {
               </ScrollView>
             </Box> 
             <Box>
-              <Input style={{backgroundColor: COLORS.grey}} py="0" px="5" my="5" onChange={setText} InputRightElement={
+              <Input style={{backgroundColor: COLORS.grey}} py="0" px="5" my="5" onChangeText={changeMessage} InputRightElement={
                 <Button  size="sm" rounded="50" w="1/5" style={{backgroundColor: COLORS.purple}} onPress={SendMessage}> Send </Button>}
               placeholder="message" variant="rounded" value={text}/>
             </Box>
