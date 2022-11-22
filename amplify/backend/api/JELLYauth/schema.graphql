@@ -30,4 +30,4 @@ type UserAuth @model @auth(rules: [{allow: public}]) {
   phone_number: AWSPhone
   chatrooms: [ChatRoom] @manyToMany(relationName: "ChatRoomUserAuth")
   Messages: [Message] @hasMany(indexName: "byUserAuth", fields: ["id"])
-}
+} 
