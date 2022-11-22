@@ -1,40 +1,35 @@
-import { View, Text, Image, StyleSheet, ScrollView } from 'react-native'
+import { View, Text, Image, StyleSheet, ScrollView, Alert } from 'react-native'
 import React, {useState} from 'react'
 import CustomInput from '../../components/CustomInput'
 import CustomButton from '../../components/CustomButton'
 import SocialSignInButtons from '../../components/SocialSignInButtons'
-import { useNavigation } from '@react-navigation/native'
+// import { useNavigation } from '@react-navigation/native'
 import { auth, user } from '../../../firebase'
 import SingUpPng from '../../../assets/sign_up.png'
+import { Auth } from "aws-amplify"
 
-// import auth from '@react-native-firebase/auth';
 
-const SignUpScreen = () => {
+const SignUpScreen = ({navigation}) => {
   const [username, setUsername] = useState('');
+  const [phone_number, setPhone_number] = useState('');
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordRepeat, setPasswordRepeat] = useState('');
 
-  const navigation = useNavigation();
+  // const navigation = useNavigation();
 
-  const onRegisterPressed = () => {
-    if (password === passwordRepeat) {
-      auth
-      .createUserWithEmailAndPassword(email, password)
-      .then(userCredentials => {
-        // auth.updateProfile(/*auth.currentUser,*/ {
-        //   displayName: username
-        // })
-        // .then(() => {
-          navigation.navigate('Home');
-          const user = userCredentials.user;
-          console.log('Registered with:', user.email);
-        // })
-      })
-      .catch(error => alert(error.message))
-    }
-    else {
-      console.warn('Passwords are not same!');
+  const onRegisterPressed = async() => {
+    try {
+      console.log(username, password);
+      await Auth.signUp({
+        username,
+        password,
+        attributes: {phone_number, name, email},
+      });
+      // navigation.navigate('ConfirmEmail', {username:username})
+    } catch(e) {
+      Alert.alert('Oops', e.message);
     }
   }
 
@@ -56,9 +51,19 @@ const SignUpScreen = () => {
           setValue={setUsername}
         />
         <CustomInput
+          placeholder="Phone number"
+          value={phone_number} 
+          setValue={setPhone_number}
+        />
+        <CustomInput
           placeholder="Email"
           value={email} 
           setValue={setEmail}
+        />
+        <CustomInput
+          placeholder="Name"
+          value={name} 
+          setValue={setName}
         />
         <CustomInput 
           placeholder="Password" 
@@ -71,6 +76,9 @@ const SignUpScreen = () => {
           value={passwordRepeat} 
           setValue={setPasswordRepeat}
           secureTextEntry={true}
+          rules={{
+            validate: value => value === password || 'Password do not match'
+          }}
         />
       </View>
 

@@ -30,6 +30,12 @@ import HomeScreen from './src/screens/HomeScreen'
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
+import { Amplify, Auth } from 'aws-amplify'
+import awsconfig from './src/aws-exports'
+// import auth from '@react-native-firebase/auth';
+
+Amplify.configure(awsconfig);
+
 export default function App() {
   const [firstLaunch, setFirstLaunch] = useState(null);
   useEffect(() => {

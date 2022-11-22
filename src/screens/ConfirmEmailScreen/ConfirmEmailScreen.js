@@ -2,12 +2,11 @@ import { View, Text, Image, StyleSheet, ScrollView } from 'react-native'
 import React, {useState} from 'react'
 import CustomInput from '../../components/CustomInput'
 import CustomButton from '../../components/CustomButton'
-import { useNavigation } from '@react-navigation/native'
+import { Auth } from "aws-amplify"
 
-const ConfirmEmailScreen = () => {
+
+const ConfirmEmailScreen = ({navigation, route}) => {
   const [code, setCode] = useState('');
-
-  const navigation = useNavigation();
 
   const onSignInPressed = () => {
     navigation.navigate('SignIn');
@@ -17,8 +16,14 @@ const ConfirmEmailScreen = () => {
     console.warn('onResendPressed');
   }
 
-  const onConfirmPressed = () => {
-    navigation.navigate('Home');
+  const onConfirmPressed = async() => {
+    try {
+      const username = route.params?.username
+      await Auth.confirmSignUp(username, code);
+      navigation.navigate('Home', {username:username});
+    } catch (e) {
+      Alert.alert('Oops', e.message);
+    }
   }
 
   return (

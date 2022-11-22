@@ -4,7 +4,7 @@ import React from 'react'
 const HomeScreen = ({navigation, route}) => {
   return (
     <View>
-      <Text style={styles.myText}>Welcome to the JELLY app, {route.params?.email}!</Text>
+      <Text style={styles.myText}>Welcome to the JELLY app, {route.params?.username}!</Text>
       {/* ДЛЯ ТЕСТА НАВИГАЦИИ ВНУТРИ STACKNAVIGATION */}
       <TouchableOpacity style={styles.Button} onPress={() => navigation.navigate('ConfirmEmail')}>
         <Text styel={styles.ButtonText}>Click me</Text>
