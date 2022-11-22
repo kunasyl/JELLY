@@ -5,9 +5,9 @@ npm install @react-navigation/native<br />
 npx expo install react-native-screens react-native-safe-area-context<br />
 npm install @react-navigation/native-stack<br />
 
-npm install -g @aws-amplify/cli
-amplify configure
-amplify pull ...
+npm install -g @aws-amplify/cli<br />
+amplify configure<br />
+amplify pull ...<br />
 
 Assigment 1
 
