@@ -17,5 +17,19 @@ export type AmplifyDependentResourcesAttributes = {
             "AppClientID": "string",
             "CreatedSNSRole": "string"
         }
+    },
+    "storage": {
+        "s3jellyauthstorage0636f7c0": {
+            "BucketName": "string",
+            "Region": "string"
+        }
+    },
+    "function": {
+        "JELLYauthPostConfirmation": {
+            "Name": "string",
+            "Arn": "string",
+            "LambdaExecutionRole": "string",
+            "Region": "string"
+        }
     }
 }
