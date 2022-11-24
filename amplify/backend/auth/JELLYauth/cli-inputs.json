@@ -6,7 +6,7 @@
     "resourceNameTruncated": "jellya9538b0c7",
     "userPoolName": "JELLYauth",
     "autoVerifiedAttributes": [
-      "phone_number"
+      "email"
     ],
     "mfaConfiguration": "OFF",
     "mfaTypes": [
@@ -63,7 +63,27 @@
       ]
     },
     "breakCircularDependency": true,
-    "dependsOn": [],
-    "hostedUI": false
+    "dependsOn": [
+      {
+        "category": "function",
+        "resourceName": "JELLYauthPostConfirmation",
+        "triggerProvider": "Cognito",
+        "attributes": [
+          "Arn",
+          "Name"
+        ]
+      }
+    ],
+    "hostedUI": false,
+    "triggers": {
+      "PostConfirmation": [
+        "custom"
+      ]
+    },
+    "parentStack": {
+      "Ref": "AWS::StackId"
+    },
+    "authTriggerConnections": "[\n  {\n    \"triggerType\": \"PostConfirmation\",\n    \"lambdaFunctionName\": \"JELLYauthPostConfirmation\"\n  }\n]",
+    "permissions": []
   }
-}
+} 

@@ -11,6 +11,9 @@ import { AntDesign, MaterialIcons } from "@expo/vector-icons";
 import { COLORS } from '../../styles/colors'
 import DiaryNote from '../../components/DiaryNote/DiaryNote'
 
+import { DataStore } from '@aws-amplify/datastore';
+import { UserAuth } from '../../models';
+
 const DiaryScreen = ({navigation}) => {
 
   const { height, width } = useWindowDimensions();
