@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet, Text} from 'react-native';
 import { useState, useEffect, useLayoutEffect } from 'react'
 import { NavigationContainer, StackActions } from '@react-navigation/native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
@@ -8,7 +8,6 @@ import { AntDesign, MaterialIcons } from "@expo/vector-icons";
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { COLORS } from './src/styles/colors'
-import { Box, Center, Fab, Icon, NativeBaseProvider, VStack, Heading, Input, HStack, Container } from 'native-base'
 import { useFonts } from 'expo-font';
 
 // TabNavigator
@@ -16,10 +15,11 @@ import TimerScreen from './src/screens/TimerScreen'
 import DiaryScreen from './src/screens/DiaryScreen'
 import ChatScreen from './src/screens/ChatScreen'
 import ProfileScreen from './src/screens/ProfileScreen'
-
+import ChatRoomsHomeScreen from './src/screens/ChatRoomsHomeScreen'
+//ChatNavigator
+import ChatRoomScreen from './src/screens/ChatRoomScreen'
 // DiaryNavigator
 import NewDiaryScreen from './src/screens/NewDiaryScreen/NewDiaryScreen';
-
 // HomeNavigator
 import SignInScreen from './src/screens/SignInScreen'
 import SignUpScreen from './src/screens/SignUpScreen'
@@ -27,6 +27,8 @@ import ConfirmEmailScreen from './src/screens/ConfirmEmailScreen'
 import ForgotPasswordScreen from './src/screens/ForgotPasswordScreen'
 import NewPasswordScreen from './src/screens/NewPasswordScreen/NewPasswordScreen'
 import HomeScreen from './src/screens/HomeScreen'
+
+import ChatsHeader from './src/components/ChatsHeader'
 
 
 const Tab = createBottomTabNavigator();
@@ -68,11 +70,11 @@ export default function App() {
     }, [navigation, route]);
     return (
       <Stack.Navigator>
-        <Stack.Screen name="SignIn" component={SignInScreen}/>
+        {/* <Stack.Screen name="SignIn" component={SignInScreen}/>
         <Stack.Screen name="SignUp" component={SignUpScreen}/>
         <Stack.Screen name="ConfirmEmail" component={ConfirmEmailScreen}/>
         <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen}/>
-        <Stack.Screen name="NewPassword" component={NewPasswordScreen}/>
+        <Stack.Screen name="NewPassword" component={NewPasswordScreen}/> */}
         <Stack.Screen name="Home" component={HomeScreen}/>
       </Stack.Navigator>
     )
@@ -86,6 +88,20 @@ export default function App() {
       </Stack.Navigator>
     )
   }
+
+  const ChatNavigator = () => {
+    return (
+      <Stack.Navigator screenOptions={{headerShown: true}}>
+        <Stack.Screen 
+          name="Chats" 
+          component={ChatRoomsHomeScreen}
+          options={{headerTitle: ChatsHeader}}
+        />
+        <Stack.Screen name="ChatRoom" component={ChatRoomScreen}/>
+      </Stack.Navigator>
+    )
+  }
+
 
   return (
     firstLaunch != null && (
@@ -129,9 +145,9 @@ export default function App() {
           />
           <Tab.Screen 
           name="Chat" 
-          component={ChatScreen}
+          component={ChatNavigator}
           options={{
-            // headerShown: false,
+            headerShown: false,
             tabBarIcon: (props) => (
               <MaterialIcons name="chat-bubble-outline" size={30} color={props.focused?COLORS.orange:COLORS.purple}/>
             )
