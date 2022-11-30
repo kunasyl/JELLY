@@ -19,17 +19,19 @@ const DiaryScreen = ({navigation}) => {
     fetchDiaries(diaryCopy);
   }, []);
 
+  useEffect(() => {
+    const subscription = DataStore.observe(Diary).subscribe((d) => {
+      if (d.model === Diary && d.opType === "INSERT") {
+        setDiaries((existingDiary) => [d.element, ...existingDiary]);
+      }
+    });
+    return () => subscription.unsubscribe();
+  }, []);
+  
   const fetchDiaries = async(diary) => {
     const authUser = await Auth.currentAuthenticatedUser();
     const data = await DataStore.query(Diary, c => c.userauthID.eq(authUser.attributes.sub));
     console.log(data);
-    // let result = []
-    // data.forEach(obj => {
-    //   Object.keys(obj).forEach(key => {
-    //     result.push(obj[key]);
-    //   });
-    // });
-    // console.log('data res', result);
 
     diary = data.map(content => {
       const getDiary = {
@@ -82,13 +84,15 @@ const DiaryScreen = ({navigation}) => {
         </HStack>
       </Center>
       <Center flex={1}>
-        <FlatList data={diaries} numColumns={2} renderItem={({ item }) =>
-          // <Box height={height*0.8} w="100%" shadow="2" rounded="lg" >
-          <HStack space={2} justifyContent="center">
-            <DiaryNote title={item?.title} />
+        <FlatList data={diaries} renderItem={({ item }) =>
+          <HStack 
+          space={2} justifyContent="center"
+          >
+            <DiaryNote title={item?.title||item?.titl} />
           </HStack>
-          // </Box>
-        } keyExtractor={item => item?.id}/>
+        } keyExtractor={item => item?.id}
+        numColumns={2}
+        />
         <Fab onPress={onNewNotePressed}
           renderInPortal={false} 
           shadow={2} 
