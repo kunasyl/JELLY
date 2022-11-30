@@ -171,6 +171,8 @@ const HomeScreen = ({navigation, route}) => {
       </View>
     </NativeBaseProvider>   
   )
+
+
 // console.log(filterdData[0])
 
 //   return (
