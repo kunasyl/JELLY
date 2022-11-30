@@ -33,4 +33,6 @@ amplify-gradle-config.json
 amplifytools.xcconfig
 .secret-*
 **.sample
+amplify-backup
+package-lock.json
 #amplify-do-not-edit-end
