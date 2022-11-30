@@ -1,3 +1,11 @@
+type Diary @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  titl: String
+  content: String
+  emoji: String
+  userauthID: ID! @index(name: "byUserAuth")
+}
+
 type UserData @model @auth(rules: [{allow: public}]) {
   id: ID!
   photo: String
@@ -30,4 +38,6 @@ type UserAuth @model @auth(rules: [{allow: public}]) {
   phone_number: AWSPhone
   chatrooms: [ChatRoom] @manyToMany(relationName: "ChatRoomUserAuth")
   Messages: [Message] @hasMany(indexName: "byUserAuth", fields: ["id"])
-} 
+  Diaries: [Diary] @hasMany(indexName: "byUserAuth", fields: ["id"])
+}
+ 
