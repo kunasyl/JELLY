@@ -3,8 +3,7 @@ import React, {useState, useEffect} from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { COLORS } from '../../styles/colors'
 
-import { NativeBaseProvider, Text, Box, Heading, Spacer, Avatar, FlatList, HStack, VStack, Input,
-Container, Header, Title, Button, Left, Right, Body, Icon, Center, SafeAreaView, TextInput } from "native-base";
+import { NativeBaseProvider, Text, Box, Spacer, Avatar, FlatList, HStack, VStack, Input, Button, Center } from "native-base";
 
 const ChatScreen = () => {
   const [text, setText] = useState('');
@@ -89,11 +88,11 @@ const ChatScreen = () => {
     <NativeBaseProvider>
       <Center mx="2">
           <VStack w="100%" justifyContent="space-between">
-            <Box maxH="90%" minH="80%">
+            <Box flex='1'>
               <FlatList data={messages} renderItem={({item}) => 
               <Box borderBottomWidth="1" _dark={{ borderColor: "muted.50"}} borderColor="muted.800" pl={["0", "4"]} pr={["0", "5"]}py="2">
                 <HStack space={[2, 3]} justifyContent="space-between">
-                <Avatar size="48px" source={{uri: 'https://cdn2.iconfinder.com/data/icons/audio-16/96/user_avatar_profile_login_button_account_member-512.png'}} />
+                  <Avatar size="48px" source={{uri: 'https://cdn2.iconfinder.com/data/icons/audio-16/96/user_avatar_profile_login_button_account_member-512.png'}} />
                   <VStack>
                     <Text _dark={{color: "warmGray.50"}} color={COLORS.dark} bold>
                       {item?.author}
@@ -102,7 +101,7 @@ const ChatScreen = () => {
                       {item?.message}
                     </Text>
                   </VStack>
-                  <Spacer ccolor={COLORS.dark} />
+                  <Spacer color={COLORS.dark} />
                   <Text fontSize="xs" _dark={{color: "warmGray.50"}} color={COLORS.purple} alignSelf="flex-start">
                     {new Date(Date(item?.datetime)).toLocaleDateString()}
                   </Text>
