@@ -6,7 +6,14 @@ import Message from '../../components/Message'
 import chatRoomData from '../../../assets/example_data/Chats'
 import MessageInput from '../../components/MessageInput'
 
+import { useRoute } from "@react-navigation/core";
+
 const ChatRoomScreen = () => {
+
+  const route = useRoute();
+
+  alert(route?.params.id);
+
   return (
     <NativeBaseProvider>
       <SafeAreaView style={styles.page}>

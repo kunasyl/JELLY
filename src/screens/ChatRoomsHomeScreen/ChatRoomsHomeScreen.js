@@ -3,14 +3,14 @@ import React, {useState, useEffect} from 'react'
 import { NativeBaseProvider, Text, Image, Avatar, HStack, VStack, FlatList} from "native-base"
 
 import ChatRoomItem from '../../components/ChatRoomItem/ChatRoomItem'
-import ChatRoomsData from '../../../assets/example_data/ChatRooms'
+import chatRoomsData from '../../../assets/example_data/ChatRooms'
 
 const ChatRoomsHomeScreen = () => {
   return (
     <NativeBaseProvider>
       <View style={styles.chat__page}>
         <FlatList 
-          data ={ChatRoomsData}
+          data ={chatRoomsData}
           renderItem={({item}) => <ChatRoomItem chatRoom={item}/>}
           showsVerticalScrollIndicator={false}
         />

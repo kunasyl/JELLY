@@ -69,12 +69,11 @@ export default function App() {
     }, [navigation, route]);
     return (
       <Stack.Navigator>
-        <Stack.Screen name="ChatRoomScreen" component={ChatRoomScreen}/>
-        <Stack.Screen name="SignIn" component={SignInScreen}/>
+        {/* <Stack.Screen name="SignIn" component={SignInScreen}/>
         <Stack.Screen name="SignUp" component={SignUpScreen}/>
         <Stack.Screen name="ConfirmEmail" component={ConfirmEmailScreen}/>
         <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen}/>
-        <Stack.Screen name="NewPassword" component={NewPasswordScreen}/>
+        <Stack.Screen name="NewPassword" component={NewPasswordScreen}/> */}
         <Stack.Screen name="Home" component={HomeScreen}/>
       </Stack.Navigator>
     )
@@ -92,8 +91,8 @@ export default function App() {
   const ChatNavigator = () => {
     return (
       <Stack.Navigator>
-        <Stack.Screen name="ChatRoom" component={ChatRoomsHomeScreen}/>
-        <Stack.Screen name="Chat" component={ChatRoomScreen}/>
+        <Stack.Screen name="Chats" component={ChatRoomsHomeScreen}/>
+        <Stack.Screen name="ChatRoom" component={ChatRoomScreen}/>
       </Stack.Navigator>
     )
   }

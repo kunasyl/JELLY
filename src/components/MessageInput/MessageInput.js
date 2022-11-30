@@ -1,7 +1,6 @@
-import { View, StyleSheet, Pressable, Button, TextInput} from 'react-native' // Pressable, Button, Input
+import { View, StyleSheet, Pressable, Button, TextInput, KeyboardAvoidingView, Platform} from 'react-native'
 import { React, useState} from 'react'
 import { COLORS } from '../../styles/colors'
-import { NativeBaseProvider, Text, Box, Spacer, Avatar, FlatList, HStack, VStack, Input, Center } from "native-base";
 
 import {
   SimpleLineIcons,
@@ -11,21 +10,37 @@ import {
   Ionicons,
 } from "@expo/vector-icons";
 
-import { useNavigation } from "@react-navigation/core";
+// import { useNavigation } from "@react-navigation/core";
 
 const MessageInput = () => {
   const [message, setMessage] = useState("");
 
-  const navigation = useNavigation();
+  // const navigation = useNavigation();
 
-  const onPress = () => {
-    // console.log("i'm pressed");
+  const sendMessage = () => {
     alert(message);
     setMessage('');
   }
+  const onPlusClicked = () => {
+    alert("on plus clicked");
+  }
+
+  const onPress = () => {
+    if(message){
+      sendMessage();
+    } else{
+      onPlusClicked();
+    }
+  }
+
+
 
   return (
-    <View style={styles.root}>
+    <KeyboardAvoidingView 
+      style={styles.root}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      keyboardVerticalOffset={110}
+    >
       <View style={styles.inputContainer}>
         <SimpleLineIcons name="emotsmile" size={24} color='grey' style={styles.icon}></SimpleLineIcons>
         <TextInput 
@@ -40,11 +55,11 @@ const MessageInput = () => {
       <Pressable style={styles.buttonContainer} onPress={onPress} >
         {
           message ? 
-          <Ionicons name='send' size={24} color='white'/> :
-          <AntDesign name='plus' size={18} color='white'/>
+          <Ionicons name='send' size={18} color='white'/> :
+          <AntDesign name='plus' size={24} color='white'/>
         }
       </Pressable>
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 
@@ -75,7 +90,7 @@ const styles = StyleSheet.create({
   },
   input: {
     flex: 1,
-    marginHorizontal: 10,
+    marginHorizontal: 10
   },
   icon: {
     marginHorizontal: 5,

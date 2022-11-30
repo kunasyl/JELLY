@@ -1,13 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { COLORS } from '../../styles/colors';
-import { StyleSheet } from "react-native";
+import { StyleSheet, Pressable } from "react-native";
 import { NativeBaseProvider, Text, Image, Avatar, HStack, VStack, View } from "native-base";
 import styles from "./styles";
+import { useNavigation } from "@react-navigation/core";
 
 export default function ChatRoomItem({ chatRoom }) {
   const user = chatRoom.users[1];
+
+  const navigation = useNavigation();
+
+  const onPress = () => {
+    navigation.navigate('ChatRoom', {id: chatRoom.id});
+  }
+
   return (
-    <View>
+    <Pressable onPress={onPress}>
       <HStack style={styles.conteiner} justifyContent="space-between" mx='3' my='2'>
         <Avatar mr="2"
           style={styles.image}
@@ -31,7 +39,7 @@ export default function ChatRoomItem({ chatRoom }) {
         </VStack>
       </HStack>
       <View style={styles.chat_item__line} color={COLORS.darkGrey} ml='77'></View>
-    </View>
+    </Pressable>
   );
 }
 
