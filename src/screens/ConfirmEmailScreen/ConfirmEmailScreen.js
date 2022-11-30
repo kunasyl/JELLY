@@ -13,14 +13,14 @@ const ConfirmEmailScreen = ({navigation, route}) => {
   }
 
   const onResendPressed = () => {
-    console.warn('onResendPressed');
+    Auth.resendSignUp(username);
   }
 
   const onConfirmPressed = async() => {
     try {
       const username = route.params?.username
       await Auth.confirmSignUp(username, code);
-      navigation.navigate('Home', {username:username});
+      navigation.navigate('SignIn');
     } catch (e) {
       Alert.alert('Oops', e.message);
     }

@@ -91,7 +91,7 @@ export default function App() {
     firstLaunch != null && (
       <NavigationContainer>
         <Tab.Navigator        
-        tabBarOptions={{
+        screenOptions={{
           labelStyle:{fontSize:12},
           activeTintColor: COLORS.orange,
           inactiveTintColor: COLORS.purple,

@@ -1,20 +1,57 @@
-import { View, Text, Image, StyleSheet, useWindowDimensions, ScrollView } from 'react-native'
-import React, {useState} from 'react'
-import Logo from '../../../assets/sign_in.png'
-import CustomInput from '../../components/CustomInput'
-import CustomButton from '../../components/CustomButton'
-import { useNavigation } from '@react-navigation/native'
-import { auth, user } from '../../../firebase'
+import { View, Text, Image, FlatList, StyleSheet, useWindowDimensions, ScrollView } from 'react-native'
+import React, { useState, useEffect } from 'react'
 
 import { Menu, HamburgerIcon, Pressable, Box, IconButton, Center, Fab, Icon, NativeBaseProvider, VStack, Heading, Input, HStack, Container } from 'native-base'
 import { AntDesign, MaterialIcons } from "@expo/vector-icons";
 import { COLORS } from '../../styles/colors'
 import DiaryNote from '../../components/DiaryNote/DiaryNote'
 
+import { Diary, UserAuth } from '../../models';
+import { Auth, DataStore } from 'aws-amplify';
+
 const DiaryScreen = ({navigation}) => {
 
   const { height, width } = useWindowDimensions();
-  
+  const [ diaries, setDiaries ] = useState([]);
+
+  useEffect(() => { 
+    let diaryCopy = [...diaries];
+    fetchDiaries(diaryCopy);
+  }, []);
+
+  const fetchDiaries = async(diary) => {
+    const authUser = await Auth.currentAuthenticatedUser();
+    const data = await DataStore.query(Diary, c => c.userauthID.eq(authUser.attributes.sub));
+    console.log(data);
+    // let result = []
+    // data.forEach(obj => {
+    //   Object.keys(obj).forEach(key => {
+    //     result.push(obj[key]);
+    //   });
+    // });
+    // console.log('data res', result);
+
+    diary = data.map(content => {
+      const getDiary = {
+        id: content.id,
+        title: content.titl,
+        // content: content.content,
+        // emoji: content.emoji,
+        // createdDate: content.createdAt,
+        // updatedDate: content.updatedAt
+      };
+      console.log(getDiary);
+      return getDiary;
+    }).reverse();
+
+    setDiaries(diary);
+    // if (!diaries) {
+    //   console.log("This user doesn't have any diaries yet");
+    // } else {
+    //   setDiaries(diaries);
+    // }
+  };
+
   const onNewNotePressed = () => {
     navigation.navigate('NewDiary')
   }
@@ -24,37 +61,34 @@ const DiaryScreen = ({navigation}) => {
       <Center w="100%">
         <Box safeAreaTop bg="white"/>
         <HStack bg="{COLORS.grey}" px="1" py="3" justifyContent="space-between" alignItems="center" w="100%" maxW="350">
-            <Text fontSize="28" fontWeight="bold">
-              Diary
-            </Text>
+          <Text fontSize="28" fontWeight="bold">
+            Diary
+          </Text>
           <HStack alignItems="center">
-            <IconButton icon={<Icon color="gray" as={AntDesign} 
-                                    name="search1" 
-                                    size="lg"/>} />
-            <Menu w="100%" trigger={triggerProps => {
-              return <Pressable accessibilityLabel="More options menu" {...triggerProps}>
-                      <Icon color="gray" as={MaterialIcons} 
-                            name="more-vert" 
-                            size="xl"/>
-                    </Pressable>;
+            <IconButton icon={
+            <Icon color="gray" as={AntDesign} name="search1" size="lg"/>} />
+            <Menu w="100%" trigger={
+              triggerProps => {
+              return (
+                <Pressable accessibilityLabel="More options menu" {...triggerProps}>
+                  <Icon color="gray" as={MaterialIcons} name="more-vert" size="xl"/>
+                </Pressable>
+              )
             }}>
-                <Menu.Item>Select</Menu.Item>
-                <Menu.Item>Remove</Menu.Item>
+              <Menu.Item>Select</Menu.Item>
+              <Menu.Item>Remove</Menu.Item>
             </Menu>
           </HStack>
         </HStack>
       </Center>
-      <Center flex={1} mt="5">
-        <ScrollView>
-          <Box height={height*0.8} w="100%" shadow="2" rounded="lg" >
-
+      <Center flex={1}>
+        <FlatList data={diaries} numColumns={2} renderItem={({ item }) =>
+          // <Box height={height*0.8} w="100%" shadow="2" rounded="lg" >
           <HStack space={2} justifyContent="center">
-            <DiaryNote/>
-            <DiaryNote/>
+            <DiaryNote title={item?.title} />
           </HStack>
-          
-          </Box>
-        </ScrollView>
+          // </Box>
+        } keyExtractor={item => item?.id}/>
         <Fab onPress={onNewNotePressed}
           renderInPortal={false} 
           shadow={2} 

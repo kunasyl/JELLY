@@ -4,7 +4,7 @@ import { Box, Center, Fab, Icon, NativeBaseProvider, VStack, Heading, Input } fr
 import { AntDesign, MaterialIcons } from "@expo/vector-icons";
 import { COLORS } from '../../styles/colors'
 
-const DiaryNote = ({ value, setValue, placeholder, secureTextEntry}) => {
+const DiaryNote = ({ title }) => {
 
     const { height, width } = useWindowDimensions();
     
@@ -32,7 +32,7 @@ const DiaryNote = ({ value, setValue, placeholder, secureTextEntry}) => {
             color: 'warmGray.50',
             textAlign: 'center'
             }}>
-                This is my notes from Diary
+              { title }
         </Box>
     )
 }
