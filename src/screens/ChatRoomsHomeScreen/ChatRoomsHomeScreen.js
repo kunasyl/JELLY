@@ -5,10 +5,7 @@ import { NativeBaseProvider, Text, Image, Avatar, HStack, VStack, FlatList} from
 import ChatRoomItem from '../../components/ChatRoomItem/ChatRoomItem'
 import ChatRoomsData from '../../../assets/example_data/ChatRooms'
 
-const chatRoom1 = ChatRoomsData[0]
-const chatRoom2 = ChatRoomsData[1]
-
-const ChatRoomsScreen = () => {
+const ChatRoomsHomeScreen = () => {
   return (
     <NativeBaseProvider>
       <View style={styles.chat__page}>
@@ -30,4 +27,4 @@ const styles = StyleSheet.create({
   }
   });
 
-export default ChatRoomsScreen
+export default ChatRoomsHomeScreen

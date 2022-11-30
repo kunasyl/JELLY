@@ -15,10 +15,11 @@ import TimerScreen from './src/screens/TimerScreen'
 import DiaryScreen from './src/screens/DiaryScreen'
 import ChatScreen from './src/screens/ChatScreen'
 import ProfileScreen from './src/screens/ProfileScreen'
-import ChatRoomsScreen from './src/screens/ChatRoomsScreen'
+import ChatRoomsHomeScreen from './src/screens/ChatRoomsHomeScreen'
+//ChatNavigator
+import ChatRoomScreen from './src/screens/ChatRoomScreen'
 // DiaryNavigator
 import NewDiaryScreen from './src/screens/NewDiaryScreen/NewDiaryScreen';
-
 // HomeNavigator
 import SignInScreen from './src/screens/SignInScreen'
 import SignUpScreen from './src/screens/SignUpScreen'
@@ -61,12 +62,13 @@ export default function App() {
     }, [navigation, route]);
     return (
       <Stack.Navigator>
-        <Stack.Screen name="Home" component={ChatRoomsScreen}/>
+        <Stack.Screen name="ChatRoomScreen" component={ChatRoomScreen}/>
         <Stack.Screen name="SignIn" component={SignInScreen}/>
         <Stack.Screen name="SignUp" component={SignUpScreen}/>
         <Stack.Screen name="ConfirmEmail" component={ConfirmEmailScreen}/>
         <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen}/>
         <Stack.Screen name="NewPassword" component={NewPasswordScreen}/>
+        <Stack.Screen name="Home" component={HomeScreen}/>
       </Stack.Navigator>
     )
   }
@@ -76,6 +78,15 @@ export default function App() {
       <Stack.Navigator>
         <Stack.Screen name="Diary" component={DiaryScreen}/>
         <Stack.Screen name="NewDiary" component={NewDiaryScreen}/>
+      </Stack.Navigator>
+    )
+  }
+
+  const ChatNavigator = () => {
+    return (
+      <Stack.Navigator>
+        <Stack.Screen name="ChatRoom" component={ChatRoomsHomeScreen}/>
+        <Stack.Screen name="Chat" component={ChatRoomScreen}/>
       </Stack.Navigator>
     )
   }
@@ -122,7 +133,7 @@ export default function App() {
           />
           <Tab.Screen 
           name="Chat" 
-          component={ChatRoomsScreen}
+          component={ChatNavigator}
           options={{
             // headerShown: false,
             tabBarIcon: (props) => (
