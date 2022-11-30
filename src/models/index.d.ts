@@ -6,6 +6,40 @@ import { LazyLoading, LazyLoadingDisabled, AsyncItem, AsyncCollection } from "@a
 
 
 
+type EagerDiary = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<Diary, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly titl?: string | null;
+  readonly content?: string | null;
+  readonly emoji?: string | null;
+  readonly userauthID: string;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazyDiary = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<Diary, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly titl?: string | null;
+  readonly content?: string | null;
+  readonly emoji?: string | null;
+  readonly userauthID: string;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type Diary = LazyLoading extends LazyLoadingDisabled ? EagerDiary : LazyDiary
+
+export declare const Diary: (new (init: ModelInit<Diary>) => Diary) & {
+  copyOf(source: Diary, mutator: (draft: MutableModel<Diary>) => MutableModel<Diary> | void): Diary;
+}
+
 type EagerUserData = {
   readonly [__modelMeta__]: {
     identifier: ManagedIdentifier<UserData, 'id'>;
@@ -56,6 +90,7 @@ type EagerUserAuth = {
   readonly phone_number?: string | null;
   readonly chatrooms?: (ChatRoomUserAuth | null)[] | null;
   readonly Messages?: (Message | null)[] | null;
+  readonly Diaries?: (Diary | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -72,6 +107,7 @@ type LazyUserAuth = {
   readonly phone_number?: string | null;
   readonly chatrooms: AsyncCollection<ChatRoomUserAuth>;
   readonly Messages: AsyncCollection<Message>;
+  readonly Diaries: AsyncCollection<Diary>;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }

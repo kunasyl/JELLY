@@ -9,6 +9,7 @@ import { AntDesign, MaterialIcons } from "@expo/vector-icons";
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { COLORS } from './src/styles/colors'
 import { Box, Center, Fab, Icon, NativeBaseProvider, VStack, Heading, Input, HStack, Container } from 'native-base'
+import { useFonts } from 'expo-font';
 
 // TabNavigator
 import TimerScreen from './src/screens/TimerScreen'
@@ -28,6 +29,7 @@ import ForgotPasswordScreen from './src/screens/ForgotPasswordScreen'
 import NewPasswordScreen from './src/screens/NewPasswordScreen/NewPasswordScreen'
 import HomeScreen from './src/screens/HomeScreen'
 
+
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
@@ -37,7 +39,12 @@ import awsconfig from './src/aws-exports'
 
 Amplify.configure(awsconfig);
 
+
 export default function App() {
+
+  const [loaded] = useFonts({
+    Montserrat: require('./assets/fonts/IstokWeb-Bold.ttf'),});
+
   const [firstLaunch, setFirstLaunch] = useState(null);
   useEffect(() => {
     async function setData() {
@@ -95,7 +102,7 @@ export default function App() {
     firstLaunch != null && (
       <NavigationContainer>
         <Tab.Navigator        
-        tabBarOptions={{
+        screenOptions={{
           labelStyle:{fontSize:12},
           activeTintColor: COLORS.orange,
           inactiveTintColor: COLORS.purple,
@@ -160,6 +167,7 @@ export default function App() {
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: '#ffffff'
+    backgroundColor: '#ffffff',
+    fontFamily: 'IstokWeb-Bold'
   },
 });
