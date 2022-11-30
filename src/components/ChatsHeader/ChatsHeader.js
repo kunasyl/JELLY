@@ -18,9 +18,11 @@ export default function ChatRoomItem() {
         source={{ uri: 'https://images.unsplash.com/photo-1554080353-a576cf803bda?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8cGhvdG98ZW58MHx8MHx8&w=1000&q=80' }}
         style={{ width: 30, height: 30, borderRadius: 30}}
       />
-      <Text
-        style={{ flex: '1', marginLeft: 50, textAlign: 'center'}}
-      >Chats</Text>
+      <Pressable style={{ flex: 1, textAlign:'center' , marginLeft: 30}}>
+        <Text style={{ fontWeight: "bold", textAlign:'center' }}>
+          Chats
+        </Text>
+      </Pressable>
       <Feather
         name="camera"
         size={24}
