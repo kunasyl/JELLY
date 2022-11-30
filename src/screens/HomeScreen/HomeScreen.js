@@ -89,7 +89,7 @@ const HomeScreen = ({navigation, route}) => {
               {/* <Text color={COLORS.darkGrey} fontSize="13.5" pl='3'> {item.published_dt} </Text> */}
             </HStack>
             <VStack>
-              <Text color={COLORS.dark} fontSize="16" bold> {item.title} </Text>
+              <Text color={ COLORS.dark } fontSize="16" bold> {item.title} </Text>
               <Text color={COLORS.dark} fontSize="15"  pt='0.7'> {item.body} </Text>
               <Text color={COLORS.purple} fontSize="15" marginTop={'6'}> See more </Text>
             </VStack>
