@@ -40,60 +40,58 @@ const HomeScreen = ({navigation, route}) => {
   return (
     <NativeBaseProvider>
       <View>
-        <ScrollView>
-          <FlatList data={data} renderItem={({item}) => 
-          <Box borderBottomWidth="0.2" borderColor="muted.500" pl={"5"} pr={"5"} py="5" > 
+        <FlatList data={data} renderItem={({item}) => 
+        <Box borderBottomWidth="0.2" borderColor="muted.500" pl={"5"} pr={"5"} py="5" > 
+          <HStack>
+            <Avatar size="25px" source={{uri: item.avatarUrl}} />
+            <Text color={COLORS.dark} fontSize="15" pb={'2'} pl = '1' bold> {item.username} </Text>
+            <Text color={COLORS.darkGrey} fontSize="13.5" pl='3'> {item.published_dt} </Text>
+          </HStack>
+          <VStack>
+            <Text color={COLORS.dark} fontSize="16" bold> {item.title_text} </Text>
+            <Text color={COLORS.dark} fontSize="15" pt='0.7'> {item.body_text} </Text>
+            <Text color={COLORS.purple} fontSize="15" marginTop={'6'}> See more </Text>
+          </VStack>
+          <View alignSelf="flex-end" >
             <HStack>
-              <Avatar size="25px" source={{uri: item.avatarUrl}} />
-              <Text color={COLORS.dark} fontSize="15" pb={'2'} pl = '1' bold> {item.username} </Text>
-              <Text color={COLORS.darkGrey} fontSize="13.5" pl='3'> {item.published_dt} </Text>
+              <View>
+                <IconButton  
+                        borderRadius= '12'
+                        renderInPortal={false} 
+                        size="sm" 
+                        style={{backgroundColor: COLORS.purple}} 
+                        icon={<Icon color="white" as={AntDesign}
+                        name="eyeo"/>} 
+                        text="Button with icon component">
+                </IconButton >
+              </View>
+              <View>
+                <IconButton  
+                        borderRadius= '12'
+                        renderInPortal={false} 
+                        size="sm" 
+                        style={{backgroundColor: COLORS.purple}} 
+                        icon={<Icon color="white" as={FontAwesome}
+                        name="comment-o" />
+                      } 
+                        text="Button with icon component">
+                </IconButton >
+              </View>
+              <View>
+                <IconButton  
+                        borderRadius= '12'
+                        renderInPortal={false} 
+                        size="sm" 
+                        style={{backgroundColor: COLORS.purple}} 
+                        icon={<Icon color="white" as={FontAwesome}
+                        name="bookmark-o"/>} 
+                        text="Button with icon component">
+                </IconButton >
+              </View>
             </HStack>
-            <VStack>
-              <Text color={COLORS.dark} fontSize="16" bold> {item.title_text} </Text>
-              <Text color={COLORS.dark} fontSize="15" pt='0.7'> {item.body_text} </Text>
-              <Text color={COLORS.purple} fontSize="15" marginTop={'6'}> See more </Text>
-            </VStack>
-            <View alignSelf="flex-end" >
-              <HStack>
-                <View>
-                  <IconButton  
-                          borderRadius= '12'
-                          renderInPortal={false} 
-                          size="sm" 
-                          style={{backgroundColor: COLORS.purple}} 
-                          icon={<Icon color="white" as={AntDesign}
-                          name="eyeo"/>} 
-                          text="Button with icon component">
-                  </IconButton >
-                </View>
-                <View>
-                  <IconButton  
-                          borderRadius= '12'
-                          renderInPortal={false} 
-                          size="sm" 
-                          style={{backgroundColor: COLORS.purple}} 
-                          icon={<Icon color="white" as={FontAwesome}
-                          name="comment-o" />
-                        } 
-                          text="Button with icon component">
-                  </IconButton >
-                </View>
-                <View>
-                  <IconButton  
-                          borderRadius= '12'
-                          renderInPortal={false} 
-                          size="sm" 
-                          style={{backgroundColor: COLORS.purple}} 
-                          icon={<Icon color="white" as={FontAwesome}
-                          name="bookmark-o"/>} 
-                          text="Button with icon component">
-                  </IconButton >
-                </View>
-              </HStack>
-            </View>
-            <Spacer ccolor={COLORS.dark} />
-          </Box>} keyExtractor={item => item.id} /> 
-        </ScrollView>
+          </View>
+          <Spacer ccolor={COLORS.dark} />
+        </Box>} keyExtractor={item => item.id} /> 
       </View>
     </NativeBaseProvider>
   )

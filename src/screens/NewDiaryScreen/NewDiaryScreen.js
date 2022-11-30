@@ -1,11 +1,9 @@
-import {View, Text, Image, StyleSheet, useWindowDimensions, ScrollView, TextInput} from 'react-native'
+import {View, Text, Alert, Image, StyleSheet, useWindowDimensions, ScrollView, TextInput} from 'react-native'
 import React, {useState} from 'react'
-import Logo from '../../../assets/sign_in.png'
-import CustomInput from '../../components/CustomInput'
 import CustomButton from '../../components/CustomButton'
 import { useNavigation } from '@react-navigation/native'
-import { auth, user } from '../../../firebase'
-import SingUpPng from "../../../assets/sign_up.png";
+import { Auth, DataStore } from 'aws-amplify'
+import { Diary, UserAuth } from '../../models'
 
 
 const NewDiaryScreen = () => {
@@ -14,10 +12,27 @@ const NewDiaryScreen = () => {
   const {height} = useWindowDimensions();
   const navigation = useNavigation();
 
-  const onNewDiaryPressed = () => {
+  const onNewDiaryPressed = async () => {
     console.log('New Diary:', diary_text);
+
+    const authUser = await Auth.currentAuthenticatedUser();
+    // const dbUser = await DataStore.query(UserAuth, authUser.attributes.sub);
+    try {
+        await DataStore.save(
+            new Diary({
+                titl: diary_title,
+                content: diary_text,
+                emoji: '',
+                userauthID: authUser.attributes.sub,
+            })
+        )
+    } catch (e) {
+        Alert.alert('Oops', e.message);
+    }
+    
     navigation.navigate('Diary')
   }
+
   return (
           <View style={styles.root}>
               <View style={styles.diary}>
