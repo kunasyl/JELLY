@@ -1,4 +1,4 @@
-import { TouchableOpacity, View, StyleSheet, Text, LogBox, ScrollView, TextInput} from 'react-native'
+import { TouchableOpacity, View, StyleSheet, Text, LogBox, ScrollView, Pressable} from 'react-native'
 import React, {useEffect, useState} from 'react'
 import { NativeBaseProvider, FlatList, HStack, Box, VStack, Icon, Image, Button, IconButton, Spacer, Avatar, Input } from "native-base";
 import { COLORS } from '../../styles/colors'
@@ -35,65 +35,72 @@ const HomeScreen = ({navigation, route}) => {
     }
   }
 
+  const onPostPressed = () => {
+    console.log('touch')
+    navigation.navigate('Post')
+  }
+
   const ItemView = ({item}) => {
     return(
-      <Box style={{flex: 1, flexDirection: "column"}} 
-           borderBottomWidth="0.2" borderColor="muted.500" pl={"5"} pr={"5"} py="5" > 
-            <HStack>
-              <Image source={{uri: item.img}} size="xl" alt="Alternate Text"/> 
-              <Text color={COLORS.dark} fontSize="15" pb={'2'} pl = '1' bold> {item.title} </Text>
-            </HStack>
-            <VStack>
-              <Text color={COLORS.darkGrey} fontSize="13.5" pl='3'> {item.published_date.month} </Text>
-              {/* <Text color={ COLORS.dark } fontSize="16" bold> {item.title} </Text> */}
-              {/* <Text color={COLORS.dark} fontSize="15"  pt='0.7'> {item.body} </Text> */}
-              <Text color={COLORS.purple} fontSize="15" marginTop={'6'}> See more </Text>
-            </VStack>
-            <View alignSelf="flex-end" >
+      <Pressable onPress={onPostPressed}>
+        <Box style={{flex: 1, flexDirection: "column"}} 
+            borderBottomWidth="0.2" borderColor="muted.500" pl={"5"} pr={"5"} py="5" > 
               <HStack>
-                <View>
-                  <IconButton  
-                          borderRadius= '14'
-                          mr = '2'
-                          width={'35'}
-                          renderInPortal={false} 
-                          size="sm" 
-                          style={{backgroundColor: COLORS.purple}} 
-                          icon={<Icon color="white" as={AntDesign}
-                          name="eyeo"/>}>
-                  </IconButton >
-                </View>
-                <View>
-                  <IconButton  
-                          borderRadius= '14'
-                          mr = '2'
-                          width={'35'}
-                          renderInPortal={false} 
-                          size="sm" 
-                          style={{backgroundColor: COLORS.purple}} 
-                          icon={<Icon color="white" as={FontAwesome}
-                          name="comment-o" />
-                        } 
-                          text="Button with icon component">
-                  </IconButton >
-                </View>
-                <View>
-                  <IconButton  
-                          borderRadius= '14'
-                          //mr = '5'
-                          width={'35'}
-                          renderInPortal={false} 
-                          size="sm" 
-                          style={{backgroundColor: COLORS.purple}} 
-                          icon={<Icon color="white" as={FontAwesome}
-                          name="bookmark-o"/>} 
-                          text="Button with icon component">
-                  </IconButton >
-                </View>
+                <Image source={{uri: item.img}} size="xl" alt="Alternate Text"/> 
+                <Text color={COLORS.dark} fontSize="15" pb={'2'} pl = '1' bold> {item.title} </Text>
               </HStack>
-            </View>
-            <Spacer ccolor={COLORS.dark} />
-          </Box>
+              <VStack>
+                <Text color={COLORS.darkGrey} fontSize="13.5" pl='3'> {item.published_date.month} </Text>
+                {/* <Text color={ COLORS.dark } fontSize="16" bold> {item.title} </Text> */}
+                {/* <Text color={COLORS.dark} fontSize="15"  pt='0.7'> {item.body} </Text> */}
+                <Text color={COLORS.purple} fontSize="15" marginTop={'6'}> See more </Text>
+              </VStack>
+              <View alignSelf="flex-end" >
+                <HStack>
+                  <View>
+                    <IconButton  
+                            borderRadius= '14'
+                            mr = '2'
+                            width={'35'}
+                            renderInPortal={false} 
+                            size="sm" 
+                            style={{backgroundColor: COLORS.purple}} 
+                            icon={<Icon color="white" as={AntDesign}
+                            name="eyeo"/>}>
+                    </IconButton >
+                  </View>
+                  <View>
+                    <IconButton  
+                            borderRadius= '14'
+                            mr = '2'
+                            width={'35'}
+                            renderInPortal={false} 
+                            size="sm" 
+                            style={{backgroundColor: COLORS.purple}} 
+                            icon={<Icon color="white" as={FontAwesome}
+                            name="comment-o" />
+                          } 
+                            text="Button with icon component">
+                    </IconButton >
+                  </View>
+                  <View>
+                    <IconButton  
+                            borderRadius= '14'
+                            //mr = '5'
+                            width={'35'}
+                            renderInPortal={false} 
+                            size="sm" 
+                            style={{backgroundColor: COLORS.purple}} 
+                            icon={<Icon color="white" as={FontAwesome}
+                            name="bookmark-o"/>} 
+                            text="Button with icon component">
+                    </IconButton >
+                  </View>
+                </HStack>
+              </View>
+              <Spacer ccolor={COLORS.dark} />
+            </Box>
+            </Pressable>
     )
   }
 
