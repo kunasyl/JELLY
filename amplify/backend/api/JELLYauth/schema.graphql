@@ -1,0 +1,42 @@
+type Diary @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  titl: String
+  content: String
+  emoji: String
+  userauthID: ID! @index(name: "byUserAuth")
+}
+
+type UserData @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  photo: String
+  gender: Boolean
+  birthdate: AWSDate
+  status: Boolean
+  UserAuth: UserAuth @hasOne
+}
+
+type Message @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  content: String
+  chatroomID: ID! @index(name: "byChatRoom")
+  userauthID: ID! @index(name: "byUserAuth")
+}
+
+type ChatRoom @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  newMessages: Int
+  LastMessage: Message @hasOne
+  Messages: [Message] @hasMany(indexName: "byChatRoom", fields: ["id"])
+  ChatRoomUsers: [UserAuth] @manyToMany(relationName: "ChatRoomUserAuth")
+}
+
+type UserAuth @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String
+  username: String
+  email: AWSEmail
+  phone_number: AWSPhone
+  chatrooms: [ChatRoom] @manyToMany(relationName: "ChatRoomUserAuth")
+  Messages: [Message] @hasMany(indexName: "byUserAuth", fields: ["id"])
+  Diaries: [Diary] @hasMany(indexName: "byUserAuth", fields: ["id"])
+} 
