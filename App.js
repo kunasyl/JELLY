@@ -27,6 +27,7 @@ import ConfirmEmailScreen from './src/screens/ConfirmEmailScreen'
 import ForgotPasswordScreen from './src/screens/ForgotPasswordScreen'
 import NewPasswordScreen from './src/screens/NewPasswordScreen/NewPasswordScreen'
 import HomeScreen from './src/screens/HomeScreen'
+import PostScreen from './src/screens/PostScreen';
 
 import ChatsHeader from './src/components/ChatsHeader'
 
@@ -70,12 +71,13 @@ export default function App() {
     }, [navigation, route]);
     return (
       <Stack.Navigator>
-        {/* <Stack.Screen name="SignIn" component={SignInScreen}/>
+        <Stack.Screen name="SignIn" component={SignInScreen}/>
         <Stack.Screen name="SignUp" component={SignUpScreen}/>
         <Stack.Screen name="ConfirmEmail" component={ConfirmEmailScreen}/>
         <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen}/>
-        <Stack.Screen name="NewPassword" component={NewPasswordScreen}/> */}
+        <Stack.Screen name="NewPassword" component={NewPasswordScreen}/>
         <Stack.Screen name="Home" component={HomeScreen}/>
+        <Stack.Screen name="Post" component={PostScreen}/>
       </Stack.Navigator>
     )
   }
