@@ -1,65 +1,23 @@
-import { SafeAreaView, View, StyleSheet, Text, LogBox, ScrollView, Image, TextInput} from 'react-native'
+import { TouchableOpacity, View, StyleSheet, Text, LogBox, ScrollView, TextInput} from 'react-native'
 import React, {useEffect, useState} from 'react'
-import { NativeBaseProvider, FlatList, HStack, Box, VStack, Icon, Button, IconButton, Spacer, Avatar } from "native-base";
+import { NativeBaseProvider, FlatList, HStack, Box, VStack, Icon, Image, Button, IconButton, Spacer, Avatar, Input } from "native-base";
 import { COLORS } from '../../styles/colors'
 import { AntDesign, Fontisto, FontAwesome } from "@expo/vector-icons";
-
-
+import { useNavigation } from '@react-navigation/native';
 
 
 const HomeScreen = ({navigation, route}) => {
 
+  const customData = require('../../../assets/example_data/blog.json')
   const [filterdData, setfilterData] = useState([])
   const [masterDara, setmasterData] = useState([])
-  const [search, setsearch] = useState('')
 
   useEffect(() => {
-    fetchPosts()
-    return () => {
-    }
+    setfilterData(customData)
+    setmasterData(customData)
+    // return () => {
+    // }
   }, [])
-
-  // const fetchPosts = () => {
-  //   Promise.all([
-  //     fetch('https://jsonplaceholder.typicode.com/posts'),
-  //     fetch('https://jsonplaceholder.typicode.com/users')
-  //   ]).then(async([aa, bb]) => {
-  //     const a = await aa.json();
-  //     const b = await bb.json();
-  //     var arr = []
-  //     arr.push(a)
-  //     arr.push(b)
-  //     return arr
-  //   })
-  //   // .then((responseText) => {
-  //   //   console.log(responseText);
-  
-  //   // })
-  //   .then((responseJson) => 
-  //     {
-  //       setfilterData(responseJson)
-  //       setmasterData(responseJson)
-  //     })
-  //   .catch((err) => {
-  //     console.log(err);
-  //   });
-  // }
-
-  const fetchPosts = () => {
-    //const apiPosts = 'https://jsonplaceholder.typicode.com/posts'
-    fetch('https://jsonplaceholder.typicode.com/posts')
-    .then((response) => response.json())
-    //.then((json) => console.log(json))
-    .then((responseJson) => 
-    {
-      setfilterData(responseJson)
-      setmasterData(responseJson)
-    }).catch(((error) => {
-      console.error(error)
-    }))
-  }
-
-  console.log(filterdData)
 
   const searchFilter = (text) => {
     if(text){
@@ -71,26 +29,24 @@ const HomeScreen = ({navigation, route}) => {
         return itemData.indexOf(textData) > -1;
       });
       setfilterData(newData);
-      setsearch(text);
+      console.log('nwdt', newData)
     } else{
       setfilterData(masterDara);
-      setsearch(text);
     }
   }
 
   const ItemView = ({item}) => {
-  //var json = JSON.parse(item);
-  //console.log(item[0].body)
     return(
-      <Box borderBottomWidth="0.2" borderColor="muted.500" pl={"5"} pr={"5"} py="5" > 
+      <Box style={{flex: 1, flexDirection: "column"}} 
+           borderBottomWidth="0.2" borderColor="muted.500" pl={"5"} pr={"5"} py="5" > 
             <HStack>
-              {/* <Avatar size="25px" source={{uri: item.users.image}} /> */}
-              {/* <Text color={COLORS.dark} fontSize="15" pb={'2'} pl = '1' bold> {item.title} </Text> */}
-              {/* <Text color={COLORS.darkGrey} fontSize="13.5" pl='3'> {item.published_dt} </Text> */}
+              <Image source={{uri: item.img}} size="xl" alt="Alternate Text"/> 
+              <Text color={COLORS.dark} fontSize="15" pb={'2'} pl = '1' bold> {item.title} </Text>
             </HStack>
             <VStack>
-              <Text color={COLORS.dark} fontSize="16" bold> {item.title} </Text>
-              <Text color={COLORS.dark} fontSize="15"  pt='0.7'> {item.body} </Text>
+              <Text color={COLORS.darkGrey} fontSize="13.5" pl='3'> {item.published_date.month} </Text>
+              {/* <Text color={ COLORS.dark } fontSize="16" bold> {item.title} </Text> */}
+              {/* <Text color={COLORS.dark} fontSize="15"  pt='0.7'> {item.body} </Text> */}
               <Text color={COLORS.purple} fontSize="15" marginTop={'6'}> See more </Text>
             </VStack>
             <View alignSelf="flex-end" >
@@ -153,11 +109,13 @@ const HomeScreen = ({navigation, route}) => {
   return(
     <NativeBaseProvider style = {{flex: 1}}>
       <View style = {styles.container}>
-        <TextInput
-          style = {styles.TextInputStyle}
-          value = {search}
+        <Input
+          variant="underlined"
+          pl={"5"}
+          size="lg"
+          // style = {styles.TextInputStyle}
           placeholder ='search...'
-          underlineColorAndroid='transparent'
+          //underlineColorAndroid='transparent'
           onChangeText={(text) => searchFilter(text)}
 
         />
@@ -171,79 +129,6 @@ const HomeScreen = ({navigation, route}) => {
       </View>
     </NativeBaseProvider>   
   )
-// console.log(filterdData[0])
-
-//   return (
-//     <NativeBaseProvider style = {{flex: 1}}>
-//       <View style = {styles.container}>
-//         <FlatList 
-//           data={filterdData} 
-//           keyExtractor={(item, index) => index.toString()}
-//           ItemSeparatorComponent = {ItemSeparatorView}
-//           renderItem={({item}) => 
-//             <Box borderBottomWidth="0.2" borderColor="muted.500" pl={"5"} pr={"5"} py="5" > 
-//             <HStack>
-//               {/* <Avatar size="25px" source={{item.users.image}} /> */}
-//               <Text color={COLORS.dark} fontSize="15" pb={'2'} pl = '1' bold> {item?.users?.lastName}{' '}{item?.users} </Text>
-//               {/* <Text color={COLORS.darkGrey} fontSize="13.5" pl='3'> {item.published_dt} </Text> */}
-//             </HStack>
-//             <VStack>
-//               <Text color={COLORS.dark} fontSize="16" bold> {item.posts} </Text>
-//               <Text color={COLORS.dark} fontSize="15" style = {{fontFamily:'IstokWeb-Italic'}} pt='0.7'> {item.posts} </Text>
-//               <Text color={COLORS.purple} fontSize="15" marginTop={'6'}> See more </Text>
-//             </VStack>
-//             <View alignSelf="flex-end" >
-//               <HStack>
-//                 <View>
-//                   <IconButton  
-//                           borderRadius= '14'
-//                           mr = '2'
-//                           width={'35'}
-//                           renderInPortal={false} 
-//                           size="sm" 
-//                           style={{backgroundColor: COLORS.purple}} 
-//                           icon={<Icon color="white" as={AntDesign}
-//                           name="eyeo"/>}>
-//                   </IconButton >
-//                 </View>
-//                 <View>
-//                   <IconButton  
-//                           borderRadius= '14'
-//                           mr = '2'
-//                           width={'35'}
-//                           renderInPortal={false} 
-//                           size="sm" 
-//                           style={{backgroundColor: COLORS.purple}} 
-//                           icon={<Icon color="white" as={FontAwesome}
-//                           name="comment-o" />
-//                         } 
-//                           text="Button with icon component">
-//                   </IconButton >
-//                 </View>
-//                 <View>
-//                   <IconButton  
-//                           borderRadius= '14'
-//                           //mr = '5'
-//                           width={'35'}
-//                           renderInPortal={false} 
-//                           size="sm" 
-//                           style={{backgroundColor: COLORS.purple}} 
-//                           icon={<Icon color="white" as={FontAwesome}
-//                           name="bookmark-o"/>} 
-//                           text="Button with icon component">
-//                   </IconButton >
-//                 </View>
-//               </HStack>
-//             </View>
-//             <Spacer ccolor={COLORS.dark} />
-//           </Box>
-          
-//         }
-//         /> 
-//       </View>
-//     </NativeBaseProvider>
-//   )
-// };
   };
 
 
