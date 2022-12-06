@@ -42,7 +42,7 @@ const HomeScreen = ({navigation, route}) => {
 
   const ItemView = ({item}) => {
     return(
-      <Pressable onPress={onPostPressed}>
+      <Pressable onPress={() => navigation.navigate('Post', item)}>
         <Box style={{flex: 1, flexDirection: "column"}} 
             borderBottomWidth="0.2" borderColor="muted.500" pl={"5"} pr={"5"} py="5" > 
               <HStack>
@@ -50,10 +50,7 @@ const HomeScreen = ({navigation, route}) => {
                 <Text color={COLORS.dark} fontSize="15" pb={'2'} pl = '1' bold> {item.title} </Text>
               </HStack>
               <VStack>
-                <Text color={COLORS.darkGrey} fontSize="13.5" pl='3'> {item.published_date.month} </Text>
-                {/* <Text color={ COLORS.dark } fontSize="16" bold> {item.title} </Text> */}
-                {/* <Text color={COLORS.dark} fontSize="15"  pt='0.7'> {item.body} </Text> */}
-                <Text color={COLORS.purple} fontSize="15" marginTop={'6'}> See more </Text>
+                <Text color={COLORS.darkGrey} fontSize="13.5" pl='3'>{item.published_date.month} </Text>
               </VStack>
               <View alignSelf="flex-end" >
                 <HStack>
