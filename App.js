@@ -27,6 +27,7 @@ import ConfirmEmailScreen from './src/screens/ConfirmEmailScreen'
 import ForgotPasswordScreen from './src/screens/ForgotPasswordScreen'
 import NewPasswordScreen from './src/screens/NewPasswordScreen/NewPasswordScreen'
 import HomeScreen from './src/screens/HomeScreen'
+import PostScreen from './src/screens/PostScreen';
 
 import ChatsHeader from './src/components/ChatsHeader'
 
@@ -76,6 +77,7 @@ export default function App() {
         <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen}/>
         <Stack.Screen name="NewPassword" component={NewPasswordScreen}/>
         <Stack.Screen name="Home" component={HomeScreen}/>
+        <Stack.Screen name="Post" component={PostScreen}/>
       </Stack.Navigator>
     )
   }
