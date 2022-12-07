@@ -71,7 +71,7 @@ export default function App() {
     return (
       <Stack.Navigator>
         <Stack.Screen name="SignIn" component={SignInScreen}/>
-        <Stack.Screen name="SignUp" component={SignUpScreen}/>
+        <Stack.Screen name="SignUp" component={SignUpScreen}/>r
         <Stack.Screen name="ConfirmEmail" component={ConfirmEmailScreen}/>
         <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen}/>
         <Stack.Screen name="NewPassword" component={NewPasswordScreen}/>
@@ -95,7 +95,10 @@ export default function App() {
         <Stack.Screen 
           name="Chats" 
           component={ChatRoomsHomeScreen}
-          options={{headerTitle: ChatsHeader}}
+          options={{
+            headerTitle: ChatsHeader,
+            headerBackTitleVisible: false
+          }}
         />
         <Stack.Screen name="ChatRoom" component={ChatRoomScreen}/>
       </Stack.Navigator>
