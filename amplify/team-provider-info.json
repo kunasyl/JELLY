@@ -24,6 +24,9 @@
           "deploymentBucketName": "amplify-jellyauth-staging-134803-deployment",
           "s3Key": "amplify-builds/JELLYauthPostConfirmation-6569587159456d4f4237-build.zip"
         }
+      },
+      "api": {
+        "JELLYauth": {}
       }
     }
   }

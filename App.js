@@ -72,7 +72,7 @@ export default function App() {
     return (
       <Stack.Navigator>
         {/* <Stack.Screen name="SignIn" component={SignInScreen}/>
-        <Stack.Screen name="SignUp" component={SignUpScreen}/>
+        <Stack.Screen name="SignUp" component={SignUpScreen}/>r
         <Stack.Screen name="ConfirmEmail" component={ConfirmEmailScreen}/>
         <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen}/>
         <Stack.Screen name="NewPassword" component={NewPasswordScreen}/> */}
@@ -97,7 +97,10 @@ export default function App() {
         <Stack.Screen 
           name="Chats" 
           component={ChatRoomsHomeScreen}
-          options={{headerTitle: ChatsHeader}}
+          options={{
+            headerTitle: ChatsHeader,
+            headerBackTitleVisible: false
+          }}
         />
         <Stack.Screen name="ChatRoom" component={ChatRoomScreen}/>
       </Stack.Navigator>
@@ -115,16 +118,6 @@ export default function App() {
           inactiveTintColor: COLORS.purple,
           showIcon: true,
         }}>
-          <Tab.Screen 
-          name="Diary" 
-          component={DiaryNavigator}
-          options={{
-            headerShown: false,
-            tabBarIcon: (props) => (
-              <MaterialIcons name="book" size={30} color={props.focused?COLORS.orange:COLORS.purple}/>
-            )
-          }}
-          />
           <Tab.Screen 
           name="Home" 
           component={HomeNavigator}
@@ -145,7 +138,7 @@ export default function App() {
             )
           }}
           />
-          {/* <Tab.Screen 
+          <Tab.Screen 
           name="Diary" 
           component={DiaryNavigator}
           options={{
@@ -154,7 +147,7 @@ export default function App() {
               <MaterialIcons name="book" size={30} color={props.focused?COLORS.orange:COLORS.purple}/>
             )
           }}
-          /> */}
+          />
           <Tab.Screen 
           name="Chat" 
           component={ChatNavigator}

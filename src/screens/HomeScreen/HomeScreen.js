@@ -1,4 +1,4 @@
-import { TouchableOpacity, View, StyleSheet, Text, LogBox, ScrollView, Pressable} from 'react-native'
+import { TouchableOpacity, View, StyleSheet, Text, useWindowDimensions, ScrollView, Pressable} from 'react-native'
 import React, {useEffect, useState} from 'react'
 import { NativeBaseProvider, FlatList, HStack, Box, VStack, Icon, Image, Button, IconButton, Spacer, Avatar, Input } from "native-base";
 import { COLORS } from '../../styles/colors'
@@ -8,9 +8,11 @@ import { useNavigation } from '@react-navigation/native';
 
 const HomeScreen = ({navigation, route}) => {
 
+
   const customData = require('../../../assets/example_data/blog.json')
   const [filterdData, setfilterData] = useState([])
   const [masterDara, setmasterData] = useState([])
+  const { width } = useWindowDimensions();
 
   useEffect(() => {
     setfilterData(customData)
@@ -18,6 +20,8 @@ const HomeScreen = ({navigation, route}) => {
     // return () => {
     // }
   }, [])
+
+  console.log(customData[0].title.substring(0,5))
 
   const searchFilter = (text) => {
     if(text){
@@ -42,20 +46,21 @@ const HomeScreen = ({navigation, route}) => {
 
   const ItemView = ({item}) => {
     return(
-      <Pressable onPress={onPostPressed}>
-        <Box style={{flex: 1, flexDirection: "column"}} 
-            borderBottomWidth="0.2" borderColor="muted.500" pl={"5"} pr={"5"} py="5" > 
+      <Pressable onPress={() => navigation.navigate('Post', item)}>
+        <Box style={{flex: 1, flexDirection: "column", width: width - 10}} 
+            borderBottomWidth="0.2" borderColor="muted.500" pl={"5"} pr={"1"} py="5" > 
+            <View style={styles.container}>
               <HStack>
                 <Image source={{uri: item.img}} size="xl" alt="Alternate Text"/> 
-                <Text color={COLORS.dark} fontSize="15" pb={'2'} pl = '1' bold> {item.title} </Text>
+                <VStack  style={{width: '60%'}}>
+                  <Text style={styles.titleText}>{item.title}</Text>
+                  <Text numberOfLines={4} style = {styles.basicText}>{item.body}</Text>
+                </VStack>
               </HStack>
               <VStack>
-                <Text color={COLORS.darkGrey} fontSize="13.5" pl='3'> {item.published_date.month} </Text>
-                {/* <Text color={ COLORS.dark } fontSize="16" bold> {item.title} </Text> */}
-                {/* <Text color={COLORS.dark} fontSize="15"  pt='0.7'> {item.body} </Text> */}
-                <Text color={COLORS.purple} fontSize="15" marginTop={'6'}> See more </Text>
+                {/* <Text color={COLORS.darkGrey} fontSize="13.5" pl='3'>{item.published_date.month} </Text> */}
               </VStack>
-              <View alignSelf="flex-end" >
+              <View alignSelf="flex-end" pt='10' pr='10'>
                 <HStack>
                   <View>
                     <IconButton  
@@ -63,7 +68,7 @@ const HomeScreen = ({navigation, route}) => {
                             mr = '2'
                             width={'35'}
                             renderInPortal={false} 
-                            size="sm" 
+                            size="xs" 
                             style={{backgroundColor: COLORS.purple}} 
                             icon={<Icon color="white" as={AntDesign}
                             name="eyeo"/>}>
@@ -75,7 +80,7 @@ const HomeScreen = ({navigation, route}) => {
                             mr = '2'
                             width={'35'}
                             renderInPortal={false} 
-                            size="sm" 
+                            size="xs" 
                             style={{backgroundColor: COLORS.purple}} 
                             icon={<Icon color="white" as={FontAwesome}
                             name="comment-o" />
@@ -89,7 +94,7 @@ const HomeScreen = ({navigation, route}) => {
                             //mr = '5'
                             width={'35'}
                             renderInPortal={false} 
-                            size="sm" 
+                            size="xs" 
                             style={{backgroundColor: COLORS.purple}} 
                             icon={<Icon color="white" as={FontAwesome}
                             name="bookmark-o"/>} 
@@ -99,6 +104,7 @@ const HomeScreen = ({navigation, route}) => {
                 </HStack>
               </View>
               <Spacer ccolor={COLORS.dark} />
+              </View>
             </Box>
             </Pressable>
     )
@@ -142,9 +148,27 @@ const HomeScreen = ({navigation, route}) => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: 'white',
+    flex:1
   },
   itemStyle: {
     padding: 10,
+  },
+  titleText:{
+    color: '#514F4F',
+    fontSize: 15,
+    paddingBottom: 2,
+    //pl: 1,
+    //width: '60%',
+    marginLeft: 5,
+    fontWeight: 'bold',
+  },
+  basicText:{
+    color: '#514F4F',
+    fontSize: 14,
+    // paddingBottom: 2,
+    //pl: 1,
+    //width: '60%',
+    marginLeft: 5,
   }
 
 });
