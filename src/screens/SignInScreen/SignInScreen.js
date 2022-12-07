@@ -21,7 +21,7 @@ const SignInScreen = ({navigation}) => {
     setLoading(true);
     try {
       const response = await Auth.signIn(username, password);
-      console.log(response);
+      // console.log(response);
       console.log(Auth.currentAuthenticatedUser())
       navigation.navigate('Home', {username:username})
     } catch (e) {

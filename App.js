@@ -71,11 +71,11 @@ export default function App() {
     }, [navigation, route]);
     return (
       <Stack.Navigator>
-        <Stack.Screen name="SignIn" component={SignInScreen}/>
+        {/* <Stack.Screen name="SignIn" component={SignInScreen}/>
         <Stack.Screen name="SignUp" component={SignUpScreen}/>
         <Stack.Screen name="ConfirmEmail" component={ConfirmEmailScreen}/>
         <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen}/>
-        <Stack.Screen name="NewPassword" component={NewPasswordScreen}/>
+        <Stack.Screen name="NewPassword" component={NewPasswordScreen}/> */}
         <Stack.Screen name="Home" component={HomeScreen}/>
         <Stack.Screen name="Post" component={PostScreen}/>
       </Stack.Navigator>
@@ -116,6 +116,16 @@ export default function App() {
           showIcon: true,
         }}>
           <Tab.Screen 
+          name="Diary" 
+          component={DiaryNavigator}
+          options={{
+            headerShown: false,
+            tabBarIcon: (props) => (
+              <MaterialIcons name="book" size={30} color={props.focused?COLORS.orange:COLORS.purple}/>
+            )
+          }}
+          />
+          <Tab.Screen 
           name="Home" 
           component={HomeNavigator}
           options={{
@@ -135,7 +145,7 @@ export default function App() {
             )
           }}
           />
-          <Tab.Screen 
+          {/* <Tab.Screen 
           name="Diary" 
           component={DiaryNavigator}
           options={{
@@ -144,7 +154,7 @@ export default function App() {
               <MaterialIcons name="book" size={30} color={props.focused?COLORS.orange:COLORS.purple}/>
             )
           }}
-          />
+          /> */}
           <Tab.Screen 
           name="Chat" 
           component={ChatNavigator}

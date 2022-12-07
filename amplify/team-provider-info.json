@@ -1,0 +1,30 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-jellyauth-staging-134803-authRole",
+      "UnauthRoleArn": "arn:aws:iam::749532996225:role/amplify-jellyauth-staging-134803-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::749532996225:role/amplify-jellyauth-staging-134803-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-jellyauth-staging-134803-deployment",
+      "UnauthRoleName": "amplify-jellyauth-staging-134803-unauthRole",
+      "StackName": "amplify-jellyauth-staging-134803",
+      "StackId": "arn:aws:cloudformation:us-east-1:749532996225:stack/amplify-jellyauth-staging-134803/49ab03b0-6a6c-11ed-8a8b-120c6f66e13d",
+      "AmplifyAppId": "d37zz2syv0yyi2",
+      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-jellyauth-staging-134803-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
+    },
+    "categories": {
+      "auth": {
+        "JELLYauth": {}
+      },
+      "storage": {
+        "s3jellyauthstorage0636f7c0": {}
+      },
+      "function": {
+        "JELLYauthPostConfirmation": {
+          "deploymentBucketName": "amplify-jellyauth-staging-134803-deployment",
+          "s3Key": "amplify-builds/JELLYauthPostConfirmation-6569587159456d4f4237-build.zip"
+        }
+      }
+    }
+  }
+}

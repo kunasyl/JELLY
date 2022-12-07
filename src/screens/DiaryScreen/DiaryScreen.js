@@ -1,4 +1,4 @@
-import { View, Text, Image, FlatList, StyleSheet, useWindowDimensions, ScrollView } from 'react-native'
+import { View, Text, Image, FlatList, StyleSheet, useWindowDimensions, ScrollView, Keyboard } from 'react-native'
 import React, { useState, useEffect } from 'react'
 
 import { Menu, HamburgerIcon, Pressable, Box, IconButton, Center, Fab, Icon, NativeBaseProvider, VStack, Heading, Input, HStack, Container } from 'native-base'
@@ -13,6 +13,7 @@ const DiaryScreen = ({navigation}) => {
 
   const { height, width } = useWindowDimensions();
   const [ diaries, setDiaries ] = useState([]);
+  const [ selectedItems, setSelectedItems ] = useState([]);
 
   useEffect(() => { 
     let diaryCopy = [...diaries];
@@ -31,7 +32,7 @@ const DiaryScreen = ({navigation}) => {
   const fetchDiaries = async(diary) => {
     const authUser = await Auth.currentAuthenticatedUser();
     const data = await DataStore.query(Diary, c => c.userauthID.eq(authUser.attributes.sub));
-    console.log(data);
+    // console.log(data);
 
     diary = data.map(content => {
       const getDiary = {
@@ -42,7 +43,7 @@ const DiaryScreen = ({navigation}) => {
         // createdDate: content.createdAt,
         // updatedDate: content.updatedAt
       };
-      console.log(getDiary);
+      // console.log(getDiary);
       return getDiary;
     }).reverse();
 
@@ -58,49 +59,105 @@ const DiaryScreen = ({navigation}) => {
     navigation.navigate('NewDiary')
   }
 
+  const handleOnPress = (note) => {
+    console.log('selectedItems.length:', selectedItems.length);
+    if(selectedItems.length) {
+      return selectNotes(note)
+    }
+    // navigation.navigate('NewDiary')
+  }
+
+  const selectNotes = (note) => {
+    console.log("note id:", note.id);
+    if(selectedItems.includes(note.id)) {
+      const newListItem = selectedItems.filter((noteId) => noteId !== note.id);
+      return setSelectedItems(newListItem);
+    }
+    setSelectedItems([...selectedItems, note.id])
+    console.log('selectedItems', selectedItems); 
+  }
+
+  const getSelected = (note) => {
+    return selectedItems.includes(note.id);
+  }
+
+  const deselectItems = () => setSelectedItems([]);
+
+  const deleteMultipleNotes = () => {
+    if(!selectedItems.length) return;
+    const newDiaries = diaries.filter(n => !selectedItems.includes(n.id));
+    setDiaries(newDiaries);
+    deselectItems();
+  }
+
+  const handleOutSidePress = () => {
+    Keyboard.dismiss();
+    deselectItems();
+  }
+
   return (
     <NativeBaseProvider >
-      <Center w="100%">
-        <Box safeAreaTop bg="white"/>
-        <HStack bg="{COLORS.grey}" px="1" py="3" justifyContent="space-between" alignItems="center" w="100%" maxW="350">
-          <Text fontSize="28" fontWeight="bold">
+      {/* <Center w="100%"> */}
+        {/* <Box safeAreaTop bg="white"/> */}
+        {/* <HStack bg="{COLORS.grey}" px="1" py="3" justifyContent="space-between" alignItems="center" w="100%" maxW="350"> */}
+          {/* <Text fontSize="28" fontWeight="bold">
             Diary
-          </Text>
-          <HStack alignItems="center">
-            <IconButton icon={
-            <Icon color="gray" as={AntDesign} name="search1" size="lg"/>} />
-            <Menu w="100%" trigger={
+          </Text> */}
+          {/* <HStack alignItems="center"> */}
+            {/* <IconButton icon={ */}
+            {/* <Icon color="gray" as={AntDesign} name="search1" size="lg"/> */}
+            {/* } /> */}
+            {/* <Menu w="100%" trigger={
               triggerProps => {
-              return (
-                <Pressable accessibilityLabel="More options menu" {...triggerProps}>
+              return <Pressable accessibilityLabel="More options menu" {...triggerProps}>
                   <Icon color="gray" as={MaterialIcons} name="more-vert" size="xl"/>
-                </Pressable>
-              )
+                </Pressable>;
             }}>
-              <Menu.Item>Select</Menu.Item>
-              <Menu.Item>Remove</Menu.Item>
-            </Menu>
-          </HStack>
-        </HStack>
-      </Center>
-      <Center flex={1}>
+              <Menu.Item onPress={() => console.log('Select pressed')}>Select</Menu.Item>
+              <Menu.Item onPress={() => console.log('Remove pressed')}>Remove</Menu.Item>
+            </Menu> */}
+          {/* </HStack> */}
+        {/* </HStack> */}
+      {/* </Center> */}
+      <Center flex={1} onPress={handleOutSidePress}>
         <FlatList data={diaries} renderItem={({ item }) =>
-          <HStack 
-          space={2} justifyContent="center"
-          >
-            <DiaryNote title={item?.title||item?.titl} />
+          <HStack space={2} justifyContent="center">            
+            <DiaryNote 
+              title={item?.title||item?.titl}
+              content={item?.content}
+              onLongPress={() => selectNotes(item)}
+              onPress={() => handleOnPress(item)}
+              selected={getSelected(item)}
+            />
           </HStack>
-        } keyExtractor={item => item?.id}
+        } keyExtractor={item => item?.id.toString()}
         numColumns={2}
+        columnWrapperStyle={{
+          justifyContent: 'space-between',
+          marginBottom: 15,
+        }}
         />
-        <Fab onPress={onNewNotePressed}
-          renderInPortal={false} 
-          shadow={2} 
-          size="md" 
-          style={{backgroundColor: COLORS.purple}} 
-          icon={<Icon color="white" as={AntDesign} 
-                      name="form" 
-                      size="md" />} />
+        {selectedItems.length ? (
+          <Fab onPress={deleteMultipleNotes}
+            renderInPortal={false} 
+            shadow={2} 
+            size="md" 
+            style={{backgroundColor: COLORS.orange}} 
+            icon={<Icon color="white" as={AntDesign} 
+                        name="delete" 
+                        size="md" />}
+          />
+          ) : (
+            <Fab onPress={onNewNotePressed}
+            renderInPortal={false} 
+            shadow={2} 
+            size="md" 
+            style={{backgroundColor: COLORS.purple}} 
+            icon={<Icon color="white" as={AntDesign} 
+                        name="form" 
+                        size="md" />}
+          />
+          )}
         </Center>
     </NativeBaseProvider >
   )
