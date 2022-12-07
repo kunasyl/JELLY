@@ -1,3 +1,11 @@
+type Comment @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  author: String!
+  body: String!
+  createdAt: AWSDateTime
+  updatedAt: AWSDateTime
+}
+
 type Diary @model @auth(rules: [{allow: public}]) {
   id: ID!
   titl: String

@@ -2,7 +2,7 @@ import { View, StyleSheet, Text, ImageBackground, ScrollView} from 'react-native
 //import React, {useEffect, useState} from 'react'
 import { NativeBaseProvider} from "native-base";
 import { COLORS } from '../../styles/colors'
-
+import Comment from '../../components/Comment/Comment'
 
 const PostScreen = ({navigation, route}) => {
 
@@ -16,13 +16,14 @@ const image = { uri: route.params.img}
             <Text style={styles.titleText}>{route.params.title}</Text>
           </View>
           <View>
-            <Text style={styles.undtitl}>{route.params.published_date.month} {route.params.published_date.day}{route.params.published_date.year}</Text>
+            <Text style={styles.undtitl}>{route.params.published_date.month}{route.params.published_date.day}{route.params.published_date.year}</Text>
             <Text style={styles.undtitl}> By {route.params.author}</Text>
           </View>
           <ImageBackground style={styles.imgStyle} source={image}/>
           <View>
             <Text style={styles.baseText}>{route.params.body}</Text>
           </View>
+          <Comment></Comment>
         </ScrollView>
       </View>
       </NativeBaseProvider>
