@@ -6,11 +6,14 @@ import Message from '../../components/Message'
 import chatRoomData from '../../../assets/example_data/Chats'
 import MessageInput from '../../components/MessageInput'
 
-import { useRoute } from "@react-navigation/core";
+import { useRoute, useNavigation } from "@react-navigation/core";
 
 const ChatRoomScreen = () => {
 
   const route = useRoute();
+  const navigation = useNavigation();
+
+  navigation.setOptions({title: 'Elon Musk'})
 
   alert(route?.params.id);
 

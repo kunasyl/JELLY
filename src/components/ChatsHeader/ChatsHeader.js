@@ -2,7 +2,7 @@ import { View, Text, StyleSheet, Pressable, Image, useWindowDimensions } from 'r
 import React from 'react'
 import { Feather } from "@expo/vector-icons";
 
-export default function ChatRoomItem() {
+export default ChatRoomItem = (props) => {
   const { width } = useWindowDimensions();
 
   return(
@@ -10,8 +10,8 @@ export default function ChatRoomItem() {
       flexDirection: "row",
       justifyContent: "space-between",
       // marginLeft: 25,
-      width: width - 20,
-      padding: 7,
+      width: width - 10,
+      padding: 3,
       alignItems: "center",
     }}>
       <Image 
@@ -20,7 +20,7 @@ export default function ChatRoomItem() {
       />
       <Pressable style={{ flex: 1, textAlign:'center' , marginLeft: 30}}>
         <Text style={{ fontWeight: "bold", textAlign:'center' }}>
-          Chats
+          {props.children}
         </Text>
       </Pressable>
       <Feather
