@@ -1,18 +1,26 @@
 import React from 'react'
-import { StyleSheet, useWindowDimensions } from 'react-native'
-import { Box, Center, Fab, Icon, NativeBaseProvider, VStack, Heading, Input } from 'native-base'
-import { AntDesign, MaterialIcons } from "@expo/vector-icons";
+import { StyleSheet, TouchableOpacity, View, Text, Dimensions, useWindowDimensions } from 'react-native'
+import { Box } from 'native-base'
 import { COLORS } from '../../styles/colors'
 
-const DiaryNote = ({ title }) => {
+const DiaryNote = ({ item, selected, title, content, onLongPress, onPress }) => {
+    console.log(item);
 
+    // const width = Dimensions.get('window').width;
     const { height, width } = useWindowDimensions();
     
     return (
-        <Box 
-        // maxW="80" rounded="lg" overflow="hidden" borderColor="coolGray.200" borderWidth="1" 
+      <TouchableOpacity
+        onPress={onPress}
+        onLongPress={onLongPress}
+        // style={styles.container}
+        >
+          {/* <Text style={styles.title} numberOfLines={2}>
+            {title}
+          </Text>
+          <Text numberOfLines={3}>{content}</Text> */}
+        <Box
         maxW={width*0.5}
-        // height="50%"
         margin="1"
         _dark={{
             borderColor: "coolGray.600",
@@ -20,7 +28,7 @@ const DiaryNote = ({ title }) => {
             shadow: 2,
             borderWidth: 0
           }} _light={{
-            backgroundColor: "gray.50"
+            backgroundColor: COLORS.purple
           }}
 
         bg={[COLORS.darkGrey]} 
@@ -34,21 +42,34 @@ const DiaryNote = ({ title }) => {
             }}>
               { title }
         </Box>
+        {selected && <View style={styles.overlay}/>}
+      </TouchableOpacity>
     )
 }
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#D3D1E2',
-    width: '90%',
-    height: 50,
-    borderRadius: 30,
-    paddingHorizontal: 25,
-    marginVertical: 10,
-    justifyContent: 'center'
+    // backgroundColor: COLORS.purple,
+    // width: width / 2 - 10,
+    // padding: 8,
+    // borderRadius: 10,
+    // overflow: 'hidden',
   },
   input: {
     color: '#827878',
+  },
+  title: {
+    fontWeight: 'bold',
+    fontSize: 16,
+    color: COLORS.whiteGrey,
+  },
+  overlay: {
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+    backgroundColor: 'rgba(0,0,0,0.4)',
+    top: 0,
+    left: 0,
   },
 })
 

@@ -33,14 +33,14 @@ const HomeScreen = ({navigation, route}) => {
         return itemData.indexOf(textData) > -1;
       });
       setfilterData(newData);
-      console.log('nwdt', newData)
+      // console.log('nwdt', newData)
     } else{
       setfilterData(masterDara);
     }
   }
 
   const onPostPressed = () => {
-    console.log('touch')
+    // console.log('touch')
     navigation.navigate('Post')
   }
 
