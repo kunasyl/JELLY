@@ -5,7 +5,6 @@
 // const aws = require("aws-sdk");
 // import aws from "aws-sdk";
 // import aws from '/var/runtime/node_modules/aws-sdk/lib/aws.js';
-// import { DynamoDB } from 'aws-sdk';
 import { DynamoDB } from "aws-sdk";
 const ddb = new DynamoDB();
 // var ddb = new aws.DynamoDB({apiVersion: '2012-10-08'});
