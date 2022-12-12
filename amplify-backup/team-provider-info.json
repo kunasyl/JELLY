@@ -1,0 +1,9 @@
+{
+  "staging": {
+    "categories": {
+      "auth": {
+        "JELLYauth": {}
+      }
+    }
+  }
+}
