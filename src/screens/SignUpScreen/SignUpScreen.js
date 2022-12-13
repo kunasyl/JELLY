@@ -7,7 +7,8 @@ import SocialSignInButtons from '../../components/SocialSignInButtons'
 import { auth, user } from '../../../firebase'
 import SingUpPng from '../../../assets/sign_up.png'
 import { Auth } from "aws-amplify"
-
+import { UserAuth } from '../../../src/models'
+import { DataStore } from '@aws-amplify/datastore'
 
 const SignUpScreen = ({navigation}) => {
   const [username, setUsername] = useState('');
@@ -27,6 +28,14 @@ const SignUpScreen = ({navigation}) => {
         password,
         attributes: {phone_number, name, email},
       });
+      await DataStore.save(
+        new UserAuth({
+          username,
+          email,
+          name,
+          phone_number
+        })
+      );
       navigation.navigate('ConfirmEmail', {username:username})
     } catch(e) {
       Alert.alert('Oops', e.message);
