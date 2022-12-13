@@ -22,11 +22,63 @@
       "function": {
         "JELLYauthPostConfirmation": {
           "deploymentBucketName": "amplify-jellyauth-staging-134803-deployment",
-          "s3Key": "amplify-builds/JELLYauthPostConfirmation-6569587159456d4f4237-build.zip"
+          "s3Key": "amplify-builds/JELLYauthPostConfirmation-70612b6468686a363853-build.zip"
         }
       },
       "api": {
         "JELLYauth": {}
+      }
+    }
+  },
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-jellyauth-dev-04427-authRole",
+      "UnauthRoleArn": "arn:aws:iam::749532996225:role/amplify-jellyauth-dev-04427-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::749532996225:role/amplify-jellyauth-dev-04427-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-jellyauth-dev-04427-deployment",
+      "UnauthRoleName": "amplify-jellyauth-dev-04427-unauthRole",
+      "StackName": "amplify-jellyauth-dev-04427",
+      "StackId": "arn:aws:cloudformation:us-east-1:749532996225:stack/amplify-jellyauth-dev-04427/0455dd80-7a4d-11ed-8a53-0aed5ae7e23b",
+      "AmplifyAppId": "d37zz2syv0yyi2",
+      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-jellyauth-dev-04427-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
+    },
+    "categories": {
+      "auth": {
+        "JELLYauth": {}
+      },
+      "function": {
+        "JELLYauthPostConfirmation": {
+          "deploymentBucketName": "amplify-jellyauth-dev-04427-deployment",
+          "s3Key": "amplify-builds/JELLYauthPostConfirmation-4372353271666e436e47-build.zip"
+        }
+      },
+      "storage": {
+        "s3jellyauthstorage0636f7c0": {}
+      },
+      "api": {
+        "JELLYauth": {}
+      }
+    }
+  },
+  "anhi": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-jellyauth-anhi-125920-authRole",
+      "UnauthRoleArn": "arn:aws:iam::906293259184:role/amplify-jellyauth-anhi-125920-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::906293259184:role/amplify-jellyauth-anhi-125920-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-jellyauth-anhi-125920-deployment",
+      "UnauthRoleName": "amplify-jellyauth-anhi-125920-unauthRole",
+      "StackName": "amplify-jellyauth-anhi-125920",
+      "StackId": "arn:aws:cloudformation:us-east-1:906293259184:stack/amplify-jellyauth-anhi-125920/adf7db70-7ab3-11ed-9484-0e9b6ec0e0ff",
+      "AmplifyAppId": "d1g6a25zig4x86"
+    },
+    "categories": {
+      "auth": {
+        "JELLYauth": {}
+      },
+      "function": {
+        "JELLYauthPostConfirmation": {}
       }
     }
   }
