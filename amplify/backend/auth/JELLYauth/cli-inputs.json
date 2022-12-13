@@ -86,4 +86,4 @@
     "authTriggerConnections": "[\n  {\n    \"triggerType\": \"PostConfirmation\",\n    \"lambdaFunctionName\": \"JELLYauthPostConfirmation\"\n  }\n]",
     "permissions": []
   }
-} 
+}    
