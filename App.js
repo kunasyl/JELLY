@@ -16,6 +16,7 @@ import DiaryScreen from './src/screens/DiaryScreen'
 import ChatScreen from './src/screens/ChatScreen'
 import ProfileScreen from './src/screens/ProfileScreen'
 import ChatRoomsHomeScreen from './src/screens/ChatRoomsHomeScreen'
+import UsersScreen from './src/screens/UsersScreen'
 //ChatNavigator
 import ChatRoomScreen from './src/screens/ChatRoomScreen'
 // DiaryNavigator
@@ -100,6 +101,13 @@ export default function App() {
           options={{
             headerTitle: ChatsHeader,
             headerBackTitleVisible: false
+          }}
+        />
+        <Stack.Screen 
+          name="UsersScreen" 
+          component={UsersScreen}
+          options={{
+            title: "Users"
           }}
         />
         <Stack.Screen name="ChatRoom" component={ChatRoomScreen}/>
