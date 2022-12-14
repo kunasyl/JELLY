@@ -35,6 +35,8 @@ exports.handler = async (event, context) => {
       TableName: tableName
   };
 
+  // create a new account 
+  // add commetnt
   try {
   await ddb.putItem(params).promise();   
   console.log('success');
