@@ -3,9 +3,6 @@ import React, {useState} from 'react'
 import Logo from '../../../assets/sign_in.png'
 import CustomInput from '../../components/CustomInput'
 import CustomButton from '../../components/CustomButton'
-// import SocialSignInButtons from '../../components/SocialSignInButtons'
-// import { useNavigation } from '@react-navigation/native'
-// import { auth, user } from '../../../firebase'
 import { Auth } from "aws-amplify"
 import {createUserAuth} from '../../graphql/mutations'
 

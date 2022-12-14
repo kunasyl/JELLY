@@ -1,9 +1,11 @@
-import { View, Text, StyleSheet, Pressable, Image, useWindowDimensions } from 'react-native'
+import { View, Text, Pressable, Image, useWindowDimensions } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
 import React from 'react'
 import { Feather } from "@expo/vector-icons";
 
 export default ChatRoomItem = (props) => {
   const { width } = useWindowDimensions();
+  const navigation = useNavigation();
 
   return(
     <View style={{ 
@@ -29,12 +31,14 @@ export default ChatRoomItem = (props) => {
         color="black"
         style={{ marginHorizontal: 10 }}
       />
-      <Feather
-        name="edit-2"
-        size={24}
-        color="black"
-        style={{ marginHorizontal: 10 }}
-      />
+      <Pressable onPress={() => navigation.navigate('UsersScreen')}>
+        <Feather
+          name="edit-2"
+          size={24}
+          color="black"
+          style={{ marginHorizontal: 10 }}
+        />
+      </Pressable>
     </View>
   )
 }
