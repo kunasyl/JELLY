@@ -4,6 +4,7 @@ import Logo from '../../../assets/sign_in.png'
 import CustomInput from '../../components/CustomInput'
 import CustomButton from '../../components/CustomButton'
 import { Auth } from "aws-amplify"
+import {createUserAuth} from '../../graphql/mutations'
 
 const SignInScreen = ({navigation}) => {
   const [username, setUsername] = useState('');
@@ -18,6 +19,7 @@ const SignInScreen = ({navigation}) => {
     setLoading(true);
     try {
       const response = await Auth.signIn(username, password);
+      
       // console.log(response);
       console.log(Auth.currentAuthenticatedUser())
       navigation.navigate('Articles', {username:username})
