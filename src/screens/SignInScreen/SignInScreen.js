@@ -22,7 +22,7 @@ const SignInScreen = ({navigation}) => {
       
       // console.log(response);
       console.log(Auth.currentAuthenticatedUser())
-      navigation.navigate('Home', {username:username})
+      navigation.navigate('Articles', {username:username})
     } catch (e) {
       Alert.alert('Oops', e.message);
     }
