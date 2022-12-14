@@ -23,7 +23,7 @@ const HomeScreen = ({navigation, route}) => {
     // }
   }, [])
 
-  console.log(customData[0].author, customData[0].id)
+  //console.log(customData[0].author, customData[0].id)
 
   const searchFilter = (text) => {
     if(text){
