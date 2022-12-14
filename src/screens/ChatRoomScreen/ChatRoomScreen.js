@@ -14,8 +14,7 @@ const ChatRoomScreen = () => {
   const navigation = useNavigation();
   useEffect(() => {
     navigation.setOptions({title: 'Elon Musk'})
-
-    alert(route?.params.id);
+    // alert(route?.params.id);
   }, []);
 
   

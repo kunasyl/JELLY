@@ -15,8 +15,9 @@ export default function UserItem({ user }) {
     console.log(newChatRoom)
 
     const authUser = await Auth.currentAuthenticatedUser();
-    console.log("authUse")
-    console.log(authUse)
+    console.log("authUser")
+    console.log(authUser)
+    console.log(authUser.attributes.email)
     const dbUser = await DataStore.query(UserAuth, c => c.email.eq(authUser.attributes.email))
     console.log("dbUser")
     console.log(dbUser)
