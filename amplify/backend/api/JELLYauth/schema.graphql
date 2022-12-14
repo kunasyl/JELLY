@@ -4,6 +4,8 @@ type Comment @model @auth(rules: [{allow: public}]) {
   body: String!
   createdAt: AWSDateTime
   updatedAt: AWSDateTime
+  blog_id: Int
+  author_name: String
 }
 
 type Diary @model @auth(rules: [{allow: public}]) {

@@ -9,6 +9,8 @@ export const getComment = /* GraphQL */ `
       body
       createdAt
       updatedAt
+      blog_id
+      author_name
       _version
       _deleted
       _lastChangedAt
@@ -28,6 +30,8 @@ export const listComments = /* GraphQL */ `
         body
         createdAt
         updatedAt
+        blog_id
+        author_name
         _version
         _deleted
         _lastChangedAt
@@ -56,6 +60,42 @@ export const syncComments = /* GraphQL */ `
         body
         createdAt
         updatedAt
+        blog_id
+        author_name
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const commentsByBlog_idAndCreatedAt = /* GraphQL */ `
+  query CommentsByBlog_idAndCreatedAt(
+    $blog_id: Int!
+    $createdAt: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelCommentFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    commentsByBlog_idAndCreatedAt(
+      blog_id: $blog_id
+      createdAt: $createdAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        author
+        body
+        createdAt
+        updatedAt
+        blog_id
+        author_name
         _version
         _deleted
         _lastChangedAt
