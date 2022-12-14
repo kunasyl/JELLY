@@ -37,6 +37,20 @@ export const schema = {
                     "type": "AWSDateTime",
                     "isRequired": false,
                     "attributes": []
+                },
+                "blog_id": {
+                    "name": "blog_id",
+                    "isArray": false,
+                    "type": "Int",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "author_name": {
+                    "name": "author_name",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
                 }
             },
             "syncable": true,
@@ -695,5 +709,5 @@ export const schema = {
     "enums": {},
     "nonModels": {},
     "codegenVersion": "3.3.2",
-    "version": "ff7cddabf9b47031ab52f3602e2a3381"
+    "version": "d73847cef36ca6457f2294ee7fe883ec"
 };

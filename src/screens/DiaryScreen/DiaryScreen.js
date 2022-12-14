@@ -83,10 +83,17 @@ const DiaryScreen = ({navigation}) => {
 
   const deselectItems = () => setSelectedItems([]);
 
-  const deleteMultipleNotes = () => {
+  const deleteMultipleNotes = async() => {
     if(!selectedItems.length) return;
+    console.log('selectedItems', selectedItems);
+    // try {
+    //   await DataStore.delete(Post, (post) => post.);
+    // } catch (e) {
+    //     Alert.alert('Oops', e.message);
+    // }
     const newDiaries = diaries.filter(n => !selectedItems.includes(n.id));
     setDiaries(newDiaries);
+    
     deselectItems();
   }
 

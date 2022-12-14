@@ -22,7 +22,7 @@
       "function": {
         "JELLYauthPostConfirmation": {
           "deploymentBucketName": "amplify-jellyauth-staging-134803-deployment",
-          "s3Key": "amplify-builds/JELLYauthPostConfirmation-6569587159456d4f4237-build.zip"
+          "s3Key": "amplify-builds/JELLYauthPostConfirmation-70612b6468686a363853-build.zip"
         }
       },
       "api": {
