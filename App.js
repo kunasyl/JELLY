@@ -76,7 +76,7 @@ export default function App() {
         <Stack.Screen name="SignUp" component={SignUpScreen}/>
         <Stack.Screen name="ConfirmEmail" component={ConfirmEmailScreen}/>
         <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen}/>
-        <Stack.Screen name="NewPassword" component={NewPasswordScreen}/> */}
+        <Stack.Screen name="NewPassword" component={NewPasswordScreen}/>
         <Stack.Screen name="Articles" component={HomeScreen}/>
         <Stack.Screen name="Post" component={PostScreen}/>
       </Stack.Navigator>

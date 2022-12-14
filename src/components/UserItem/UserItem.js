@@ -16,6 +16,7 @@ export default function UserItem({ user }) {
 
     const authUser = await Auth.currentAuthenticatedUser();
     console.log("authUse")
+    console.log(authUse)
     const dbUser = await DataStore.query(UserAuth, c => c.email.eq(authUser.attributes.email))
     console.log("dbUser")
     console.log(dbUser)
