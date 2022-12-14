@@ -10,10 +10,15 @@ export default function UserItem({ user }) {
   const navigation = useNavigation();
 
   const onPress = async () => {
-    const newChatRoom = await DataStore.save(new ChatRoom({newMessages: 0}))
+    const newChatRoom = await DataStore.save(new ChatRoom({newMessages: 1}))
+    console.log("on press - newChatRoom")
+    console.log(newChatRoom)
 
     const authUser = await Auth.currentAuthenticatedUser();
+    console.log("authUse")
     const dbUser = await DataStore.query(UserAuth, c => c.email.eq(authUser.attributes.email))
+    console.log("dbUser")
+    console.log(dbUser)
     await DataStore.save(new ChatRoomUserAuth({
       userAuth: dbUser,
       chatRoom: newChatRoom
@@ -25,6 +30,7 @@ export default function UserItem({ user }) {
     }))
 
     navigation.navigate('ChatRoom', {id: newChatRoom.id})
+    console.log("on press - " + dbUser.attributes.email)
   }
 
   return (
@@ -37,7 +43,6 @@ export default function UserItem({ user }) {
         <VStack flex={1} justifyContent='center'>
           <HStack justifyContent='space-between'>
             <Text color={COLORS.dark} bold>{user.name}</Text>
-      
           </HStack>
         </VStack>
       </HStack>
