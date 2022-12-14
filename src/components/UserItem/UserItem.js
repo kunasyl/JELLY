@@ -3,12 +3,34 @@ import { COLORS } from '../../styles/colors';
 import { StyleSheet, Pressable } from "react-native";
 import { NativeBaseProvider, Text, Image, Avatar, HStack, VStack, View } from "native-base";
 import { useNavigation } from "@react-navigation/core";
+import { Auth, DataStore } from "aws-amplify";
+import { ChatRoom, ChatRoomUserAuth, UserAuth } from "../../models";
 
 export default function UserItem({ user }) {  
   const navigation = useNavigation();
 
-  const onPress = () => {
-    // create a chat room
+  const onPress = async () => {
+    const newChatRoom = await DataStore.save(new ChatRoom({newMessages: 1}))
+    console.log("on press - newChatRoom")
+    console.log(newChatRoom)
+
+    const authUser = await Auth.currentAuthenticatedUser();
+    console.log("authUse")
+    const dbUser = await DataStore.query(UserAuth, c => c.email.eq(authUser.attributes.email))
+    console.log("dbUser")
+    console.log(dbUser)
+    await DataStore.save(new ChatRoomUserAuth({
+      userAuth: dbUser,
+      chatRoom: newChatRoom
+    }))
+
+    await DataStore.save(new ChatRoomUserAuth({
+      userAuth: user,
+      chatRoom: newChatRoom
+    }))
+
+    navigation.navigate('ChatRoom', {id: newChatRoom.id})
+    console.log("on press - " + dbUser.attributes.email)
   }
 
   return (
@@ -21,7 +43,6 @@ export default function UserItem({ user }) {
         <VStack flex={1} justifyContent='center'>
           <HStack justifyContent='space-between'>
             <Text color={COLORS.dark} bold>{user.name}</Text>
-      
           </HStack>
         </VStack>
       </HStack>

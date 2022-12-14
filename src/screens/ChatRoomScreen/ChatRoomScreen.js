@@ -12,10 +12,13 @@ const ChatRoomScreen = () => {
 
   const route = useRoute();
   const navigation = useNavigation();
+  useEffect(() => {
+    navigation.setOptions({title: 'Elon Musk'})
 
-  navigation.setOptions({title: 'Elon Musk'})
+    alert(route?.params.id);
+  }, []);
 
-  alert(route?.params.id);
+  
 
   return (
     <NativeBaseProvider>

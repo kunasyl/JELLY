@@ -12,16 +12,17 @@ const UsersScreen = () => {
   const [ users, setUsers ] = useState([]);
   
   useEffect( () => {
-    // query users
-    const fetchUsers = async () => {
-      const authUser = await Auth.currentAuthenticatedUser();
-      
-      const fetchedUsers = await DataStore.query(UserAuth);
-      
-      setUsers(fetchedUsers);
-    };
-    fetchUsers();
+    DataStore.query(UserAuth).then(setUsers);
   }, [])
+
+  // useEffect( () => {
+  //   // query users
+  //   const fetchUsers = async () => {
+  //     const fetchedUsers = await DataStore.query(UserAuth);
+  //     setUsers(fetchedUsers);
+  //   };
+  //   fetchUsers();
+  // }, [])
 
   return (
     <NativeBaseProvider>

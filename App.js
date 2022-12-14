@@ -66,7 +66,7 @@ export default function App() {
     useLayoutEffect(() => {
       navigation.setOptions({tabBarStyle: {display: 'none'}});
       const routeName = getFocusedRouteNameFromRoute(route);
-      if (routeName==="Home") {
+      if (routeName==="Articles") {
         navigation.setOptions({tabBarStyle: {display: 'flex'}});
       }
     }, [navigation, route]);
@@ -76,8 +76,8 @@ export default function App() {
         <Stack.Screen name="SignUp" component={SignUpScreen}/>
         <Stack.Screen name="ConfirmEmail" component={ConfirmEmailScreen}/>
         <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen}/>
-        <Stack.Screen name="NewPassword" component={NewPasswordScreen}/>
-        <Stack.Screen name="Home" component={HomeScreen}/>
+        <Stack.Screen name="NewPassword" component={NewPasswordScreen}/> */}
+        <Stack.Screen name="Articles" component={HomeScreen}/>
         <Stack.Screen name="Post" component={PostScreen}/>
       </Stack.Navigator>
     )
