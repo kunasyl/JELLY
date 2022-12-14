@@ -15,6 +15,8 @@ type EagerComment = {
   readonly body: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
+  readonly blog_id?: number | null;
+  readonly author_name?: string | null;
 }
 
 type LazyComment = {
@@ -26,6 +28,8 @@ type LazyComment = {
   readonly body: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
+  readonly blog_id?: number | null;
+  readonly author_name?: string | null;
 }
 
 export declare type Comment = LazyLoading extends LazyLoadingDisabled ? EagerComment : LazyComment

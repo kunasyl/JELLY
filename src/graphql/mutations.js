@@ -12,6 +12,8 @@ export const createComment = /* GraphQL */ `
       body
       createdAt
       updatedAt
+      blog_id
+      author_name
       _version
       _deleted
       _lastChangedAt
@@ -29,6 +31,8 @@ export const updateComment = /* GraphQL */ `
       body
       createdAt
       updatedAt
+      blog_id
+      author_name
       _version
       _deleted
       _lastChangedAt
@@ -46,6 +50,8 @@ export const deleteComment = /* GraphQL */ `
       body
       createdAt
       updatedAt
+      blog_id
+      author_name
       _version
       _deleted
       _lastChangedAt

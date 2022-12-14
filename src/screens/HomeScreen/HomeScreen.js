@@ -5,6 +5,8 @@ import { COLORS } from '../../styles/colors'
 import { AntDesign, Fontisto, FontAwesome } from "@expo/vector-icons";
 import { useNavigation } from '@react-navigation/native';
 
+import { FlashList } from "@shopify/flash-list";
+
 
 const HomeScreen = ({navigation, route}) => {
 
@@ -21,7 +23,7 @@ const HomeScreen = ({navigation, route}) => {
     // }
   }, [])
 
-  console.log(customData[0].title.substring(0,5))
+  console.log(customData[0].author, customData[0].id)
 
   const searchFilter = (text) => {
     if(text){
@@ -133,7 +135,7 @@ const HomeScreen = ({navigation, route}) => {
 
         />
 
-        <FlatList 
+        <FlashList 
           data={filterdData} 
           keyExtractor={(item, index) => index.toString()}
           ItemSeparatorComponent = {ItemSeparatorView}
