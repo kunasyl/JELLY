@@ -14,17 +14,27 @@ import {onCreateComment} from '../../graphql/subscriptions'
 import { FlashList } from "@shopify/flash-list";
 
 
-const Comment = ({ comment }) => {
+const Comment = ({ blog_iden }) => {
 
-  const [post, setPost] = useState(null)
-
-
+  const [post, setPost] = useState([])
+  
   useEffect(() => {
-    API.graphql(graphqlOperation(listComments, {})).then(
-      (result) => setPost(result.data?.listComments)
-    );
 
+    console.log(blog_iden)
 
+    const fetchData = async () => {
+      await API.graphql(graphqlOperation(listComments, {}))
+      .then(
+        (result) => setPost(result.data?.listComments.items.filter(function (el){return el.blog_id == blog_iden}))
+      );
+
+      console.log('POST in fetch data', post)
+    }
+  
+    // call the function
+    fetchData()
+
+    console.log('POST in use_ef', post)
     // API.graphql(graphqlOperation(onCreateComment)).subscribe({
     //   next: (value) => {
     //     console.log('step 2')
@@ -33,12 +43,9 @@ const Comment = ({ comment }) => {
     //   },
     //   //error: (err) => console.warn(err),
     // })
-
-
-
   }, []);
 
-  console.log(post)
+  console.log('POST in out_ef', post)
 
   // console.log('step 3')
   // useEffect(() => {
@@ -58,7 +65,7 @@ const Comment = ({ comment }) => {
     return <ActivityIndicator/>;
   }
 
-  console.log(post.items)
+  //console.log(post.items)
 
   const ItemView = ({item}) => {
     return(
@@ -82,7 +89,7 @@ const Comment = ({ comment }) => {
 
   return(
     <FlashList
-      data={post.items}
+      data={post}
       renderItem={ItemView}
       // inverted
     />
