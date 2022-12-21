@@ -15,11 +15,8 @@ const DiaryPageScreen = ({navigation, route}) => {
   console.log('content', route.params.content);
 
   const onNewDiaryPressed = async () => {
-<<<<<<< HEAD:src/screens/NewDiaryScreen/NewDiaryScreen.js
     // console.log('New Diary:', diary_text);
 
-=======
->>>>>>> origin:src/screens/DiaryPageScreen/DiaryPageScreen.js
     const authUser = await Auth.currentAuthenticatedUser();
     try {
         await DataStore.save(
