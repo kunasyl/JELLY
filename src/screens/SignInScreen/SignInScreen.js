@@ -21,7 +21,7 @@ const SignInScreen = ({navigation}) => {
       const response = await Auth.signIn(username, password);
       
       // console.log(response);
-      console.log(Auth.currentAuthenticatedUser())
+      // console.log(Auth.currentAuthenticatedUser())
       navigation.navigate('Articles', {username:username})
     } catch (e) {
       Alert.alert('Oops', e.message);

@@ -14,6 +14,7 @@ const DiaryScreen = ({navigation}) => {
   const { height, width } = useWindowDimensions();
   const [ diaries, setDiaries ] = useState([]);
   const [ selectedItems, setSelectedItems ] = useState([]);
+  const [ diariesIds, setDiariesIds ] = useState([]);
 
   useEffect(() => { 
     let diaryCopy = [...diaries];
@@ -56,37 +57,48 @@ const DiaryScreen = ({navigation}) => {
   };
 
   const onNewNotePressed = () => {
-    navigation.navigate('NewDiary')
+    navigation.navigate('DiaryPage', {})
   }
 
   const handleOnPress = (note) => {
-    console.log('selectedItems.length:', selectedItems.length);
+    // console.log('selectedItems.length:', selectedItems.length);
     if(selectedItems.length) {
-      return selectNotes(note)
+      console.log('selectedItems.length:', selectedItems.length);
+      return selectNotes(note, note.id)
     }
-    // navigation.navigate('NewDiary')
+    console.log('handled note', note)
+    console.log('handled note title', note.title)
+    navigation.navigate('DiaryPage', {id: note.id, title: note.title||note.titl, content: note.content})
   }
 
   const selectNotes = (note) => {
-    console.log("note id:", note.id);
+    // console.log("note id:", note.id);
     if(selectedItems.includes(note.id)) {
       const newListItem = selectedItems.filter((noteId) => noteId !== note.id);
       return setSelectedItems(newListItem);
     }
     setSelectedItems([...selectedItems, note.id])
-    console.log('selectedItems', selectedItems); 
+    // console.log('selectedItems', selectedItems); 
   }
 
   const getSelected = (note) => {
     return selectedItems.includes(note.id);
   }
-
+  
   const deselectItems = () => setSelectedItems([]);
 
-  const deleteMultipleNotes = () => {
+  const deleteMultipleNotes = async() => {
     if(!selectedItems.length) return;
+    try {
+      selectedItems.map((i) =>
+        DataStore.delete(Diary, (diary) => diary.id.eq(i))
+      );
+    } catch (e) {
+        Alert.alert('Oops', e.message);
+    }
     const newDiaries = diaries.filter(n => !selectedItems.includes(n.id));
     setDiaries(newDiaries);
+    
     deselectItems();
   }
 
@@ -97,35 +109,13 @@ const DiaryScreen = ({navigation}) => {
 
   return (
     <NativeBaseProvider >
-      {/* <Center w="100%"> */}
-        {/* <Box safeAreaTop bg="white"/> */}
-        {/* <HStack bg="{COLORS.grey}" px="1" py="3" justifyContent="space-between" alignItems="center" w="100%" maxW="350"> */}
-          {/* <Text fontSize="28" fontWeight="bold">
-            Diary
-          </Text> */}
-          {/* <HStack alignItems="center"> */}
-            {/* <IconButton icon={ */}
-            {/* <Icon color="gray" as={AntDesign} name="search1" size="lg"/> */}
-            {/* } /> */}
-            {/* <Menu w="100%" trigger={
-              triggerProps => {
-              return <Pressable accessibilityLabel="More options menu" {...triggerProps}>
-                  <Icon color="gray" as={MaterialIcons} name="more-vert" size="xl"/>
-                </Pressable>;
-            }}>
-              <Menu.Item onPress={() => console.log('Select pressed')}>Select</Menu.Item>
-              <Menu.Item onPress={() => console.log('Remove pressed')}>Remove</Menu.Item>
-            </Menu> */}
-          {/* </HStack> */}
-        {/* </HStack> */}
-      {/* </Center> */}
       <Center flex={1} onPress={handleOutSidePress}>
         <FlatList data={diaries} renderItem={({ item }) =>
           <HStack space={2} justifyContent="center">            
             <DiaryNote 
               title={item?.title||item?.titl}
               content={item?.content}
-              onLongPress={() => selectNotes(item)}
+              onLongPress={() => selectNotes(item, item?.id)}
               onPress={() => handleOnPress(item)}
               selected={getSelected(item)}
             />

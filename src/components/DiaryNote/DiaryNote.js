@@ -4,7 +4,7 @@ import { Box } from 'native-base'
 import { COLORS } from '../../styles/colors'
 
 const DiaryNote = ({ item, selected, title, content, onLongPress, onPress }) => {
-    console.log(item);
+    // console.log(item);
 
     // const width = Dimensions.get('window').width;
     const { height, width } = useWindowDimensions();

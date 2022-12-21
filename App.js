@@ -20,7 +20,7 @@ import UsersScreen from './src/screens/UsersScreen'
 //ChatNavigator
 import ChatRoomScreen from './src/screens/ChatRoomScreen'
 // DiaryNavigator
-import NewDiaryScreen from './src/screens/NewDiaryScreen/NewDiaryScreen';
+import DiaryPageScreen from './src/screens/DiaryPageScreen/DiaryPageScreen';
 // HomeNavigator
 import SignInScreen from './src/screens/SignInScreen'
 import SignUpScreen from './src/screens/SignUpScreen'
@@ -87,7 +87,7 @@ export default function App() {
     return (
       <Stack.Navigator>
         <Stack.Screen name="Diary" component={DiaryScreen}/>
-        <Stack.Screen name="NewDiary" component={NewDiaryScreen}/>
+        <Stack.Screen name="DiaryPage" component={DiaryPageScreen}/>
       </Stack.Navigator>
     )
   }
