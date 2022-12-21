@@ -19,11 +19,7 @@ const HomeScreen = ({navigation, route}) => {
   useEffect(() => {
     setfilterData(customData)
     setmasterData(customData)
-    // return () => {
-    // }
   }, [])
-
-  //console.log(customData[0].author, customData[0].id)
 
   const searchFilter = (text) => {
     if(text){
@@ -39,11 +35,6 @@ const HomeScreen = ({navigation, route}) => {
     } else{
       setfilterData(masterDara);
     }
-  }
-
-  const onPostPressed = () => {
-    // console.log('touch')
-    navigation.navigate('Post')
   }
 
   const ItemView = ({item}) => {

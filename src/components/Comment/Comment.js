@@ -20,52 +20,44 @@ const Comment = ({ blog_iden }) => {
   
   useEffect(() => {
 
-    // console.log(blog_iden)
-
     const fetchData = async () => {
-      await API.graphql(graphqlOperation(listComments, {}))
+      API.graphql(graphqlOperation(listComments))
       .then(
-        (result) => setPost(result.data?.listComments.items.filter(function (el){return el.blog_id == blog_iden}))
+        (result) => {
+          const items = setPost(result.data?.listComments.items.filter(function (el){return el.blog_id == blog_iden}))
+          //console.log(items.sort())
+          if(items){
+            setPost(items.sort(function(a,b){
+              var dateA = Date(a.createdAt)
+              var dateB = Date(b.createdAt)
+              return dateA>dateB ? -1 : dateA<dateB ? 1 : 0
+            }))
+          }
+        }
       );
-
-      // console.log('POST in fetch data', post)
     }
-  
-    // call the function
     fetchData()
-
-    // console.log('POST in use_ef', post)
-    // API.graphql(graphqlOperation(onCreateComment)).subscribe({
-    //   next: (value) => {
-    //     console.log('step 2')
-    //     console.log('New message')
-    //     console.log(value)
-    //   },
-    //   //error: (err) => console.warn(err),
-    // })
   }, []);
 
-  // console.log('POST in out_ef', post)
-
-  // console.log('step 3')
-  // useEffect(() => {
-  //   console.log('step 1')
-  //   API.graphql(graphqlOperation(onCreateComment)).subscribe({
-  //     next: (value) => {
-  //       console.log('step 2')
-  //       console.log('New message')
-  //       console.log(value)
-  //     },
-  //     //error: (err) => console.warn(err),
-  //   })
-  // }, []);
+  useEffect(() => {
+    API.graphql(graphqlOperation(onCreateComment)).subscribe({
+      next: (value) => {
+      },
+    })
+  }, []);
 
 
   if(!post) {
     return <ActivityIndicator/>;
   }
 
-  //console.log(post.items)
+  console.log(post.sort(function(a,b){
+    var dateA = Date(a.createdAt)
+    var dateB = Date(b.createdAt)
+    console.log('A: ', a.createdAt)
+    console.log('B: ', b.createdAt)
+    return dateA>dateB ? -1 : dateA<dateB ? 1 : 0;
+  }))
 
   const ItemView = ({item}) => {
     return(
