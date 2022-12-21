@@ -13,7 +13,7 @@ const NewDiaryScreen = () => {
   const navigation = useNavigation();
 
   const onNewDiaryPressed = async () => {
-    console.log('New Diary:', diary_text);
+    // console.log('New Diary:', diary_text);
 
     const authUser = await Auth.currentAuthenticatedUser();
     // const dbUser = await DataStore.query(UserAuth, authUser.attributes.sub);

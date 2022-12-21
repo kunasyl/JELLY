@@ -60,7 +60,7 @@ const DiaryScreen = ({navigation}) => {
   }
 
   const handleOnPress = (note) => {
-    console.log('selectedItems.length:', selectedItems.length);
+    // console.log('selectedItems.length:', selectedItems.length);
     if(selectedItems.length) {
       return selectNotes(note)
     }
@@ -68,13 +68,13 @@ const DiaryScreen = ({navigation}) => {
   }
 
   const selectNotes = (note) => {
-    console.log("note id:", note.id);
+    // console.log("note id:", note.id);
     if(selectedItems.includes(note.id)) {
       const newListItem = selectedItems.filter((noteId) => noteId !== note.id);
       return setSelectedItems(newListItem);
     }
     setSelectedItems([...selectedItems, note.id])
-    console.log('selectedItems', selectedItems); 
+    // console.log('selectedItems', selectedItems); 
   }
 
   const getSelected = (note) => {

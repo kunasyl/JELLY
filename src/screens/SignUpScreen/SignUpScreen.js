@@ -22,7 +22,7 @@ const SignUpScreen = ({navigation}) => {
 
   const onRegisterPressed = async() => {
     try {
-      console.log(username, password);
+      // console.log(username, password);
       
       await Auth.signUp({
         username,

@@ -20,7 +20,7 @@ const Comment = ({ blog_iden }) => {
   
   useEffect(() => {
 
-    console.log(blog_iden)
+    // console.log(blog_iden)
 
     const fetchData = async () => {
       await API.graphql(graphqlOperation(listComments, {}))
@@ -28,13 +28,13 @@ const Comment = ({ blog_iden }) => {
         (result) => setPost(result.data?.listComments.items.filter(function (el){return el.blog_id == blog_iden}))
       );
 
-      console.log('POST in fetch data', post)
+      // console.log('POST in fetch data', post)
     }
   
     // call the function
     fetchData()
 
-    console.log('POST in use_ef', post)
+    // console.log('POST in use_ef', post)
     // API.graphql(graphqlOperation(onCreateComment)).subscribe({
     //   next: (value) => {
     //     console.log('step 2')
@@ -45,7 +45,7 @@ const Comment = ({ blog_iden }) => {
     // })
   }, []);
 
-  console.log('POST in out_ef', post)
+  // console.log('POST in out_ef', post)
 
   // console.log('step 3')
   // useEffect(() => {
