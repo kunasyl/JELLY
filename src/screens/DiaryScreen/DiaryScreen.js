@@ -33,27 +33,16 @@ const DiaryScreen = ({navigation}) => {
   const fetchDiaries = async(diary) => {
     const authUser = await Auth.currentAuthenticatedUser();
     const data = await DataStore.query(Diary, c => c.userauthID.eq(authUser.attributes.sub));
-    // console.log(data);
 
     diary = data.map(content => {
       const getDiary = {
         id: content.id,
         title: content.titl,
-        // content: content.content,
-        // emoji: content.emoji,
-        // createdDate: content.createdAt,
-        // updatedDate: content.updatedAt
       };
-      // console.log(getDiary);
       return getDiary;
     }).reverse();
 
     setDiaries(diary);
-    // if (!diaries) {
-    //   console.log("This user doesn't have any diaries yet");
-    // } else {
-    //   setDiaries(diaries);
-    // }
   };
 
   const onNewNotePressed = () => {
@@ -62,23 +51,17 @@ const DiaryScreen = ({navigation}) => {
 
   const handleOnPress = (note) => {
     if(selectedItems.length) {
-      console.log('selectedItems.length:', selectedItems.length);
       return selectNotes(note, note.id)
     }
-    console.log('handled note', note)
-    console.log('handled note title', note.title)
     navigation.navigate('DiaryPage', {id: note.id, title: note.title||note.titl, content: note.content})
   }
 
   const selectNotes = (note, dataStoreNoteId) => {
-    console.log("note id:", note.id);
-    console.log('dataStoreNoteId: ', dataStoreNoteId);
     if(selectedItems.includes(note.id)) {
       const newListItem = selectedItems.filter((noteId) => noteId !== note.id);
       return setSelectedItems(newListItem);
     }
     setSelectedItems([...selectedItems, note.id])
-    console.log('selectedItems', selectedItems); 
   }
 
   const getSelected = (note) => {

@@ -11,9 +11,6 @@ const DiaryPageScreen = ({navigation, route}) => {
   const [diary_text,diaryText] =  React.useState('');
   const {height} = useWindowDimensions();
 
-  console.log('title', route.params.title);
-  console.log('content', route.params.content);
-
   const onNewDiaryPressed = async () => {
     const authUser = await Auth.currentAuthenticatedUser();
     try {
@@ -33,10 +30,6 @@ const DiaryPageScreen = ({navigation, route}) => {
   }
 
   const onEditDiaryPressed = async() => {
-    console.log(route.params.title);
-    console.log(route.params.content);
-    console.log('onEditDiaryPressed', route.params.id);
-
   }
 
   return (
