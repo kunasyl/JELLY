@@ -49,4 +49,5 @@ type UserAuth @model @auth(rules: [{allow: public}]) {
   chatrooms: [ChatRoom] @manyToMany(relationName: "ChatRoomUserAuth")
   Messages: [Message] @hasMany(indexName: "byUserAuth", fields: ["id"])
   Diaries: [Diary] @hasMany(indexName: "byUserAuth", fields: ["id"])
-} 
+}
+ 

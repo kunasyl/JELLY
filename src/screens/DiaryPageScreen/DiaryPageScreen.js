@@ -1,22 +1,26 @@
 import {View, Text, Alert, Image, StyleSheet, useWindowDimensions, ScrollView, TextInput} from 'react-native'
 import React, {useState} from 'react'
 import CustomButton from '../../components/CustomButton'
-import { useNavigation } from '@react-navigation/native'
+import { TabRouter, useNavigation } from '@react-navigation/native'
 import { Auth, DataStore } from 'aws-amplify'
 import { Diary, UserAuth } from '../../models'
 
 
-const NewDiaryScreen = () => {
+const DiaryPageScreen = ({navigation, route}) => {
   const [diary_title,diaryTitle] =  useState('');
   const [diary_text,diaryText] =  React.useState('');
   const {height} = useWindowDimensions();
-  const navigation = useNavigation();
+
+  console.log('title', route.params.title);
+  console.log('content', route.params.content);
 
   const onNewDiaryPressed = async () => {
+<<<<<<< HEAD:src/screens/NewDiaryScreen/NewDiaryScreen.js
     // console.log('New Diary:', diary_text);
 
+=======
+>>>>>>> origin:src/screens/DiaryPageScreen/DiaryPageScreen.js
     const authUser = await Auth.currentAuthenticatedUser();
-    // const dbUser = await DataStore.query(UserAuth, authUser.attributes.sub);
     try {
         await DataStore.save(
             new Diary({
@@ -33,32 +37,48 @@ const NewDiaryScreen = () => {
     navigation.navigate('Diary')
   }
 
+  const onEditDiaryPressed = async() => {
+    console.log(route.params.title);
+    console.log(route.params.content);
+    console.log('onEditDiaryPressed', route.params.id);
+
+  }
+
   return (
           <View style={styles.root}>
               <View style={styles.diary}>
                   <TextInput
                     style={styles.title}
-                    onChangeText={diaryTitle}
-                    value={diary_title}
-                    setValue={diaryTitle}
+                    onChangeText={route.params.title || diaryTitle}
+                    value={route.params.title || diary_title}
+                    setValue={route.params.title || diaryTitle}
                     placeholder={"Title"}
                   />
                   <TextInput
                       style={styles.text}
                       multiline
                       numberOfLines={4}
-                      value={diary_text}
-                      onChangeText={diaryText}
-                      setValue={diaryText}
+                      value={route.params.content || diary_text}
+                      onChangeText={route.params.content || diaryText}
+                      setValue={route.params.content || diaryText}
                       placeholder={"Start typing"}
                   />
               </View>
 
-            <CustomButton
-                text="SAVE"
-                onPress={onNewDiaryPressed}
-                style={styles.btn}
-            />
+            {(route.params?.title || route.params?.content) ? (
+                    <CustomButton
+                    text="SAVE"
+                    onPress={onEditDiaryPressed}
+                    style={styles.btn}
+                    />
+                ) : (
+                    <CustomButton
+                    text="CREATE"
+                    onPress={onNewDiaryPressed}
+                    style={styles.btn}
+                    />
+                )
+            }
 
           </View>
   )
@@ -93,4 +113,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default NewDiaryScreen
+export default DiaryPageScreen
